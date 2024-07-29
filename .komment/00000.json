@@ -1,0 +1,219 @@
+[
+  {
+    "name": "App.tsx",
+    "path": "App.tsx",
+    "content": {
+      "structured": {
+        "description": "A React application that generates a user activity report. The report includes a list of users with their name, role, address, and activities such as login, logout, and purchase. The code uses an enum for user roles, a tuple type for user activities, and an intersection type for the User object.",
+        "items": [
+          {
+            "id": "bd010041-eabe-37b3-1b44-efe824488c21",
+            "ancestors": [],
+            "description": "Converts a user activity object into a string representation. It takes an array-like object with three properties: username, action, and date. The function returns a formatted string combining these properties, displaying the username, action, and date of the activity in a human-readable format.",
+            "params": [
+              {
+                "name": "activity",
+                "optional": false,
+                "type_name": "UserActivity",
+                "description": "Used to format user activity information."
+              }
+            ],
+            "returns": {
+              "type_name": "string",
+              "description": "A formatted message indicating the username, action and date of an activity."
+            },
+            "usage": {
+              "language": "typescript",
+              "code": "const userActivity = [\"John\", \"edited\", new Date(\"2021-08-25T14:30:00Z\")];\nformatActivity(userActivity);\n",
+              "description": ""
+            },
+            "name": "formatActivity",
+            "location": {
+              "start": 43,
+              "insert": 43,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 4,
+            "docLength": null
+          },
+          {
+            "id": "1840ec05-01f0-7fbd-b94e-21d24279c7c2",
+            "ancestors": [],
+            "description": "Filters users based on their age and activity status, then maps them to a report format displaying user information and their activities. The report is rendered as an unordered list with each user's details and activities listed individually.",
+            "params": [
+              {
+                "name": "obj",
+                "optional": false,
+                "type_name": "object",
+                "description": "2 level nested. It contains two properties: 'users' and 'options'. The 'users' property expects an array, while the 'options' property is an object with default values for 'includeInactive' and 'activityFilter'."
+              },
+              {
+                "name": "obj.users",
+                "optional": false,
+                "type_name": "UserActivityReportProps['users']",
+                "description": "An array of user objects."
+              },
+              {
+                "name": "obj.minAge",
+                "optional": true,
+                "type_name": "number",
+                "description": "Used to filter users by age.",
+                "default_value": "18"
+              },
+              {
+                "name": "obj.options",
+                "optional": false,
+                "type_name": "{\n    includeInactive = defaultOptions.includeInactive,\n    activityFilter = defaultOptions.activityFilter,\n  } = defaultOptions",
+                "description": "Optional, which means that if it's not passed as an argument when calling this function, then it will have its default values."
+              }
+            ],
+            "returns": {
+              "type_name": "JSX.Element",
+              "description": "A React component that represents a user activity report. The report consists of a list of user cards with their name, role, age, address and activities. Each user card includes details about the user's status and the activities they are involved in."
+            },
+            "usage": {
+              "language": "typescript",
+              "code": "const users = [\n  { name: 'John', role: 'Admin', age: 25, active: true, activities: ['Swimming', 'Golf'] },\n  { name: 'Jane', role: 'User', age: 30, active: false, activities: [] },\n];\n\n<UserActivityReport users={users} />\n",
+              "description": ""
+            },
+            "name": "UserActivityReport",
+            "location": {
+              "start": 48,
+              "insert": 48,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 36,
+            "docLength": null
+          },
+          {
+            "id": "39a4a38b-ae40-ee92-1c46-0eafb8ddc23a",
+            "ancestors": [],
+            "description": "Renders a user interface with an `<h1>` element displaying \"User Activity Report\". It also renders a `UserActivityReport` component, passing in `users`, `minAge=18`, and an object containing options: `includeInactive=true` and a filter function that excludes 'logout' actions.",
+            "params": [],
+            "usage": {
+              "language": "typescript",
+              "code": "const users = [\n    { name: 'John', age: 25, action: 'login' },\n    { name: 'Jane', age: 30, action: 'logout' }\n];\n\n<App users={users} />\n",
+              "description": "\nPasses an array of user objects to the component."
+            },
+            "name": "App",
+            "location": {
+              "start": 122,
+              "insert": 122,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 6,
+            "docLength": null
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "source.js",
+    "path": "source.js",
+    "content": {
+      "structured": {
+        "description": "A generateUserReport function that filters and transforms an array of users based on input parameters. The function uses JavaScript's built-in Date object and regular expressions to format dates according to a specified date format. It then returns an array of user objects with their name, age, active status, and registration date formatted as per the provided date format.",
+        "items": [
+          {
+            "id": "d53cbba0-24f7-218c-4847-20615ae69f95",
+            "ancestors": [],
+            "description": "Generates a report for users based on their age and activity status. It filters out users under a specified minimum age (default is 18) and inactive users unless explicitly included. The report includes the user's name, age, activity status, and registration date in a formatted string.",
+            "params": [
+              {
+                "name": "users",
+                "optional": false,
+                "type_name": "User[]",
+                "description": "Required for report generation."
+              },
+              {
+                "name": "minAge",
+                "optional": true,
+                "type_name": "number",
+                "description": "Used to filter users based on their age.",
+                "default_value": "18"
+              },
+              {
+                "name": "options",
+                "optional": true,
+                "type_name": "object",
+                "description": "Optional.",
+                "default_value": "{}"
+              }
+            ],
+            "returns": {
+              "type_name": "object",
+              "description": "An array of objects containing properties name, age, active and registrationDate for users who meet specified conditions."
+            },
+            "usage": {
+              "language": "javascript",
+              "code": "const users = [\n  { name: 'John', age: 25, active: true, registrationDate: new Date('2020-01-01') },\n  { name: 'Jane', age: 30, active: false, registrationDate: new Date('2019-06-15') }\n];\n\nconst report = generateUserReport(users);\n",
+              "description": ""
+            },
+            "name": "generateUserReport",
+            "location": {
+              "start": 1,
+              "insert": 1,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 24,
+            "docLength": null
+          },
+          {
+            "id": "cc00b37d-10a0-bebc-3444-f2ae98deeef4",
+            "ancestors": [
+              "d53cbba0-24f7-218c-4847-20615ae69f95"
+            ],
+            "description": "Takes a date and a format string as input, converts the date to a human-readable format, and returns a string representing the formatted date based on the provided format string.",
+            "params": [
+              {
+                "name": "date",
+                "optional": false,
+                "type_name": "number",
+                "description": "The date to be formatted."
+              },
+              {
+                "name": "format",
+                "optional": false,
+                "type_name": "string",
+                "description": "Used to define the output date format."
+              }
+            ],
+            "returns": {
+              "type_name": "string",
+              "description": "A formatted date representation according to the specified format, replacing placeholders 'YYYY' with the year, 'MM' with the month and 'DD' with the day in the original date."
+            },
+            "usage": {
+              "language": "javascript",
+              "code": "var result = formatDate('2021-05-27', 'YYYY-MM-DD');\n",
+              "description": "\nReturn a string formatted according to the provided date and format."
+            },
+            "name": "formatDate",
+            "location": {
+              "start": 4,
+              "insert": 4,
+              "offset": " ",
+              "indent": 2,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 11,
+            "docLength": null
+          }
+        ]
+      }
+    }
+  }
+]

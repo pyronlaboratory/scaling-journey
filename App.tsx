@@ -40,11 +40,46 @@ const defaultOptions = {
   activityFilter: (activity: UserActivity) => true,
 };
 
+/**
+ * @description Converts a user activity object into a string representation. It takes
+ * an array-like object with three properties: username, action, and date. The function
+ * returns a formatted string combining these properties, displaying the username,
+ * action, and date of the activity in a human-readable format.
+ *
+ * @param {UserActivity} activity - Used to format user activity information.
+ *
+ * @returns {string} A formatted message indicating the username, action and date of
+ * an activity.
+ */
 const formatActivity = (activity: UserActivity): string => {
   const [username, action, date] = activity;
   return `${username} performed ${action} on ${date.toLocaleDateString()}`;
 };
 
+/**
+ * @description Filters users based on their age and activity status, then maps them
+ * to a report format displaying user information and their activities. The report
+ * is rendered as an unordered list with each user's details and activities listed individually.
+ *
+ * @param {object} obj - 2 level nested. It contains two properties: 'users' and
+ * 'options'. The 'users' property expects an array, while the 'options' property is
+ * an object with default values for 'includeInactive' and 'activityFilter'.
+ *
+ * @param {UserActivityReportProps['users']} obj.users - An array of user objects.
+ *
+ * @param {number} obj.minAge - Used to filter users by age.
+ *
+ * @param {{
+ *     includeInactive = defaultOptions.includeInactive,
+ *     activityFilter = defaultOptions.activityFilter,
+ *   } = defaultOptions} obj.options - Optional, which means that if it's not passed
+ * as an argument when calling this function, then it will have its default values.
+ *
+ * @returns {JSX.Element} A React component that represents a user activity report.
+ * The report consists of a list of user cards with their name, role, age, address
+ * and activities. Each user card includes details about the user's status and the
+ * activities they are involved in.
+ */
 const UserActivityReport: React.FC<Props> = ({
   users,
   minAge = 18,
@@ -119,6 +154,12 @@ const users: User[] = [
   },
 ];
 
+/**
+ * @description Renders a user interface with an `<h1>` element displaying "User
+ * Activity Report". It also renders a `UserActivityReport` component, passing in
+ * `users`, `minAge=18`, and an object containing options: `includeInactive=true` and
+ * a filter function that excludes 'logout' actions.
+ */
 const App: React.FC = () => (
   <div>
     <h1>User Activity Report</h1>

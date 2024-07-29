@@ -10,7 +10,9 @@ class UserRole(Enum):
 UserActivity = Tuple[str, str, datetime]
 
 class User:
+    # inline comment
     def __init__(self, name: str, age: int, active: bool, role: UserRole, address: Dict[str, str], activities: List[UserActivity]):
+        # inline comment
         self.name = name
         self.age = age
         self.active = active
@@ -19,6 +21,7 @@ class User:
         self.activities = activities
 
 def format_activity(activity: UserActivity) -> str:
+    # inline comment
     username, action, date = activity
     return f"{username} performed {action} on {date.strftime('%Y-%m-%d')}"
 
@@ -27,6 +30,7 @@ def generate_user_activity_report(
     min_age: int = 18,
     options: Optional[Dict[str, Optional[Callable[[UserActivity], bool]]]] = None
 ) -> List[Dict[str, str]]:
+    # inline comment
     if options is None:
         options = {}
     include_inactive = options.get('include_inactive', False)

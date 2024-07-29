@@ -438,5 +438,604 @@
         ]
       }
     }
+  },
+  {
+    "name": "service.java",
+    "path": "service.java",
+    "content": {
+      "structured": {
+        "description": "Classes and enums representing users, their activities, and addresses. It uses Java Stream API and lambda expressions to generate a user activity report based on certain conditions. The report includes details about each user, such as name, age, status, role, and address, along with the activities they performed.",
+        "items": [
+          {
+            "id": "8f9096e5-e317-a892-0444-d7e5ba3d7e47",
+            "ancestors": [],
+            "description": "Represents an activity performed by a user in a system. It encapsulates the details of a specific action taken by a user, including the user's name, the action itself, and the date it was performed. The class provides a way to format this information into a human-readable string.",
+            "name": "UserActivity",
+            "location": {
+              "start": 12,
+              "insert": 12,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "class",
+            "length": 28,
+            "docLength": null
+          },
+          {
+            "id": "be8ee171-82bc-d79d-7f4f-712741dc9b2e",
+            "ancestors": [
+              "8f9096e5-e317-a892-0444-d7e5ba3d7e47"
+            ],
+            "description": "Retrieves the value of a variable named `username` and returns it as a string. This suggests that the variable `username` stores the username of an entity, likely for identification or authentication purposes. The returned string can be used to access or display the username accordingly.",
+            "params": [],
+            "returns": {
+              "type_name": "String",
+              "description": "a string representing the username.",
+              "complex_type": false
+            },
+            "usage": {
+              "language": "java",
+              "code": "UserActivity userActivity = new UserActivity(\"John\", \"login\", new Date());\nString username = userActivity.getUsername();\nSystem.out.println(username); // Output: John",
+              "description": ""
+            },
+            "name": "getUsername",
+            "location": {
+              "start": 23,
+              "insert": 23,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 3,
+            "docLength": null
+          },
+          {
+            "id": "3e7146cc-cbfd-75bf-1b49-7e738a74a13d",
+            "ancestors": [
+              "8f9096e5-e317-a892-0444-d7e5ba3d7e47"
+            ],
+            "description": "Retrieves and returns a string value representing an action. The returned value is stored in the `action` variable, which may have been previously set by another part of the program. This allows other parts of the code to access and utilize the current action value.",
+            "params": [],
+            "returns": {
+              "type_name": "String",
+              "description": "a string value stored in the `action` variable.",
+              "complex_type": false
+            },
+            "usage": {
+              "language": "java",
+              "code": "UserActivity ua = new UserActivity(\"Alice\", \"login\", new Date());\nString action = ua.getAction(); \nSystem.out.println(action); // Output: login",
+              "description": ""
+            },
+            "name": "getAction",
+            "location": {
+              "start": 27,
+              "insert": 27,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 3,
+            "docLength": null
+          },
+          {
+            "id": "fd660805-f903-4ab0-7042-342b8d38ded5",
+            "ancestors": [
+              "8f9096e5-e317-a892-0444-d7e5ba3d7e47"
+            ],
+            "description": "Retrieves a `Date` object and returns it. The returned object represents a specific point in time, encapsulating the year, month, day, hour, minute, second, and millisecond.",
+            "params": [],
+            "returns": {
+              "type_name": "Date",
+              "description": "a `Date` object containing the current system date and time.",
+              "complex_type": false
+            },
+            "usage": {
+              "language": "java",
+              "code": "Date date = new UserActivity(\"Alice\", \"login\", new Date(1672531200000L)).getDate();",
+              "description": ""
+            },
+            "name": "getDate",
+            "location": {
+              "start": 31,
+              "insert": 31,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 3,
+            "docLength": null
+          },
+          {
+            "id": "b921bb35-c029-eab6-e041-5a419e4955ca",
+            "ancestors": [
+              "8f9096e5-e317-a892-0444-d7e5ba3d7e47"
+            ],
+            "description": "Concatenates a string representation of date, an action, and a username to produce a formatted string. It uses a SimpleDateFormat object to format the date in the specified format \"yyyy-MM-dd\". The resulting string describes an event performed by a user on a specific date.",
+            "params": [],
+            "returns": {
+              "type_name": "String",
+              "description": "a formatted string containing the username, action, and date.",
+              "complex_type": false
+            },
+            "usage": {
+              "language": "java",
+              "code": "UserActivity activity = new UserActivity(\"John\", \"login\", new Date());\nSystem.out.println(activity.format());",
+              "description": ""
+            },
+            "name": "format",
+            "location": {
+              "start": 35,
+              "insert": 35,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 4,
+            "docLength": null
+          },
+          {
+            "id": "193a9ebd-5ffa-3c84-4f40-d1a6166cd2bb",
+            "ancestors": [],
+            "description": "Represents an individual with details such as name, age, activity status, role, address, and a list of activities. It provides getters for these properties and has a nested Address class to represent the user's location.",
+            "name": "User",
+            "location": {
+              "start": 41,
+              "insert": 41,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "class",
+            "length": 70,
+            "docLength": null
+          },
+          {
+            "id": "342f4eda-fa3c-d5a5-b24e-9ea1afb5a8dd",
+            "ancestors": [
+              "193a9ebd-5ffa-3c84-4f40-d1a6166cd2bb"
+            ],
+            "description": "Retrieves and returns a string value representing the name. The returned value is stored in a variable named `name`. This function provides an interface to access the name attribute.",
+            "params": [],
+            "returns": {
+              "type_name": "String",
+              "description": "a string representation of an instance variable named \"name\".",
+              "complex_type": false
+            },
+            "usage": {
+              "language": "java",
+              "code": "User user = new User(\"John\", 25, true, UserRole.ADMIN,\n        new User.Address(\"123 Main St\", \"Metropolis\", \"USA\"), new ArrayList<>());\nString name = user.getName();\n",
+              "description": ""
+            },
+            "name": "getName",
+            "location": {
+              "start": 58,
+              "insert": 58,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 3,
+            "docLength": null
+          },
+          {
+            "id": "9f7557ba-148a-1483-ac40-70629401ae79",
+            "ancestors": [
+              "193a9ebd-5ffa-3c84-4f40-d1a6166cd2bb"
+            ],
+            "description": "Retrieves and returns an integer value representing a person's age. The age is stored as a variable within the class, which allows for its retrieval through this method. This function does not modify the age but rather provides access to it.",
+            "params": [],
+            "returns": {
+              "type_name": "integer",
+              "description": "an integer representing the current age.",
+              "complex_type": false
+            },
+            "usage": {
+              "language": "java",
+              "code": "User user = new User(\"John\", 25, true, UserRole.ADMIN, new User.Address(\"123 Main St\", \"Metropolis\", \"USA\"), new ArrayList<>());\nint age = user.getAge();\nSystem.out.println(age);",
+              "description": ""
+            },
+            "name": "getAge",
+            "location": {
+              "start": 62,
+              "insert": 62,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 3,
+            "docLength": null
+          },
+          {
+            "id": "6854ade5-f2da-edb1-d74d-565d218c81ab",
+            "ancestors": [
+              "193a9ebd-5ffa-3c84-4f40-d1a6166cd2bb"
+            ],
+            "description": "Returns a boolean value indicating the state of an object or variable called \"active\". The exact purpose and scope of \"active\" are not specified, but it is likely a flag or indicator used elsewhere in the program to control execution flow.",
+            "params": [],
+            "returns": {
+              "type_name": "boolean",
+              "description": "a boolean value indicating whether the object's \"active\" state is true or false.",
+              "complex_type": false
+            },
+            "usage": {
+              "language": "java",
+              "code": "User user = new User(\"Alice\", 25, true, UserRole.ADMIN, \n                     new User.Address(\"123 Main St\", \"Metropolis\", \"USA\"), \n                     new ArrayList<>());\nSystem.out.println(user.isActive());",
+              "description": ""
+            },
+            "name": "isActive",
+            "location": {
+              "start": 66,
+              "insert": 66,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 3,
+            "docLength": null
+          },
+          {
+            "id": "25427a19-69aa-67b9-e842-21bb4e8b982a",
+            "ancestors": [
+              "193a9ebd-5ffa-3c84-4f40-d1a6166cd2bb"
+            ],
+            "description": "Returns an instance of the `UserRole` class, representing a user's role. This method retrieves and provides access to the existing user role without modifying it. The returned object is read-only, reflecting the current state of the user's role.",
+            "params": [],
+            "returns": {
+              "type_name": "UserRole",
+              "description": "an instance of `UserRole`.",
+              "complex_type": false
+            },
+            "usage": {
+              "language": "java",
+              "code": "User user = new User(\"Alice\", 25, true, UserRole.ADMIN, \n                    new Address(\"123 Main St\", \"Metropolis\", \"USA\"), \n                    new ArrayList<>());\nUserRole role = user.getRole();\nSystem.out.println(role);",
+              "description": ""
+            },
+            "name": "getRole",
+            "location": {
+              "start": 70,
+              "insert": 70,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 3,
+            "docLength": null
+          },
+          {
+            "id": "563bf15d-7f83-9f9d-9e47-768f22e85f98",
+            "ancestors": [
+              "193a9ebd-5ffa-3c84-4f40-d1a6166cd2bb"
+            ],
+            "description": "Retrieves and returns an object of type `Address`. The returned object is assigned to a variable named `address`, which is presumably declared elsewhere in the code. This function provides read-only access to the stored address information.",
+            "params": [],
+            "returns": {
+              "type_name": "Address",
+              "description": "an object of type `Address`.",
+              "complex_type": false
+            },
+            "usage": {
+              "language": "java",
+              "code": "User user = new User(\"Alice\", 25, true, UserRole.ADMIN,\n        new User.Address(\"123 Main St\", \"Metropolis\", \"USA\"), aliceActivities);\nAddress address = user.getAddress();\n",
+              "description": ""
+            },
+            "name": "getAddress",
+            "location": {
+              "start": 74,
+              "insert": 74,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 3,
+            "docLength": null
+          },
+          {
+            "id": "bb18c66a-52cd-178d-df41-729190878449",
+            "ancestors": [
+              "193a9ebd-5ffa-3c84-4f40-d1a6166cd2bb"
+            ],
+            "description": "Retrieves a list of user activities and returns it. The returned list is not modified by the function, as it simply provides access to an existing collection of activities. This read-only approach allows for querying or rendering the activities without altering their state.",
+            "params": [],
+            "returns": {
+              "type_name": "List",
+              "description": "a list of `UserActivity` objects.",
+              "complex_type": false
+            },
+            "usage": {
+              "language": "java",
+              "code": "List<UserActivity> activities = users.get(0).getActivities();\n",
+              "description": ""
+            },
+            "name": "getActivities",
+            "location": {
+              "start": 78,
+              "insert": 78,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 3,
+            "docLength": null
+          },
+          {
+            "id": "496d344b-2969-97b7-0645-c155471ea384",
+            "ancestors": [
+              "193a9ebd-5ffa-3c84-4f40-d1a6166cd2bb"
+            ],
+            "description": "Represents an address with properties for street, city, and country. It provides a way to construct an address from these components and offers a string representation of the address. The class is designed to encapsulate an address value object.",
+            "name": "Address",
+            "location": {
+              "start": 82,
+              "insert": 82,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "class",
+            "length": 28,
+            "docLength": null
+          },
+          {
+            "id": "90f220fc-3d24-329d-4c43-f582152424d2",
+            "ancestors": [
+              "193a9ebd-5ffa-3c84-4f40-d1a6166cd2bb",
+              "496d344b-2969-97b7-0645-c155471ea384"
+            ],
+            "description": "Retrieves and returns a string value representing the street address. This method is likely part of a larger class for encapsulating or manipulating geographic information, such as an address book entry. The returned value is presumably stored in an instance variable named `street`.",
+            "params": [],
+            "returns": {
+              "type_name": "String",
+              "description": "a string representing the value of the `street` variable.",
+              "complex_type": false
+            },
+            "usage": {
+              "language": "java",
+              "code": "User.Address address = new User.Address(\"123 Main St\", \"Metropolis\", \"USA\");\nString street = address.getStreet();",
+              "description": ""
+            },
+            "name": "getStreet",
+            "location": {
+              "start": 93,
+              "insert": 93,
+              "offset": " ",
+              "indent": 8,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 3,
+            "docLength": null
+          },
+          {
+            "id": "f56cb52d-5709-b687-6a49-b733ec19722b",
+            "ancestors": [
+              "193a9ebd-5ffa-3c84-4f40-d1a6166cd2bb",
+              "496d344b-2969-97b7-0645-c155471ea384"
+            ],
+            "description": "Retrieves and returns a string value representing a city. This method appears to provide read-only access to the stored city information, allowing users to retrieve the current city value without modifying it. The returned value is a copy of the internal `city` variable.",
+            "params": [],
+            "returns": {
+              "type_name": "String",
+              "description": "a string value representing the city.",
+              "complex_type": false
+            },
+            "usage": {
+              "language": "java",
+              "code": "Address address = new User.Address(\"123 Main St\", \"Metropolis\", \"USA\");\nString city = address.getCity();\n",
+              "description": ""
+            },
+            "name": "getCity",
+            "location": {
+              "start": 97,
+              "insert": 97,
+              "offset": " ",
+              "indent": 8,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 3,
+            "docLength": null
+          },
+          {
+            "id": "f5aff567-cbd7-ffb2-0948-0bf5413646ee",
+            "ancestors": [
+              "193a9ebd-5ffa-3c84-4f40-d1a6166cd2bb",
+              "496d344b-2969-97b7-0645-c155471ea384"
+            ],
+            "description": "Retrieves and returns a string value representing a country. This function provides read-only access to the internal state of an object, allowing users to obtain the current country without modifying it. The returned value is a simple string representation of the country.",
+            "params": [],
+            "returns": {
+              "type_name": "String",
+              "description": "a string representing the country's name or value.",
+              "complex_type": false
+            },
+            "usage": {
+              "language": "java",
+              "code": "Address address = new Address(\"123 Main St\", \"New York\", \"USA\");\nString country = address.getCountry();",
+              "description": ""
+            },
+            "name": "getCountry",
+            "location": {
+              "start": 101,
+              "insert": 101,
+              "offset": " ",
+              "indent": 8,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 3,
+            "docLength": null
+          },
+          {
+            "id": "9f1ce9e4-9bc5-a78c-004b-1dc478d21ae5",
+            "ancestors": [
+              "193a9ebd-5ffa-3c84-4f40-d1a6166cd2bb",
+              "496d344b-2969-97b7-0645-c155471ea384"
+            ],
+            "description": "Concatenates three string variables: `street`, `city`, and `country`, separated by commas, to form a single string representation of an object's address. This method overrides the default `toString` behavior, providing a custom string output for objects of this class.",
+            "params": [],
+            "returns": {
+              "type_name": "String",
+              "description": "a string concatenation of street, city, and country.",
+              "complex_type": false
+            },
+            "usage": {
+              "language": "java",
+              "code": "Address address = new Address(\"123 Main St\", \"Metropolis\", \"USA\");\nSystem.out.println(address.toString());",
+              "description": ""
+            },
+            "name": "toString",
+            "location": {
+              "start": 105,
+              "insert": 105,
+              "offset": " ",
+              "indent": 8,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 4,
+            "docLength": null
+          },
+          {
+            "id": "75ce2fc2-ca31-1d8e-484a-82cb038bb506",
+            "ancestors": [],
+            "description": "Generates a user activity report based on provided input parameters, filtering users by age and including inactive users if required, then formatting each user's activities in a readable format. The generated report includes essential information about the user and their activities.",
+            "name": "UserActivityReport",
+            "location": {
+              "start": 112,
+              "insert": 112,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "class",
+            "length": 55,
+            "docLength": null
+          },
+          {
+            "id": "cab5c418-ece7-9b90-064d-66aec00ef780",
+            "ancestors": [
+              "75ce2fc2-ca31-1d8e-484a-82cb038bb506"
+            ],
+            "description": "Generates a report on user activity by filtering users based on age and activity status, then collecting their activities that match a specified filter. The report includes formatted activities for each user.",
+            "params": [
+              {
+                "name": "users",
+                "type_name": "List<User>",
+                "description": "list of user objects to be processed and filtered according to specific criteria.\n\nStreamed for filtering and mapping operations. Contains a collection of user objects. Each user object has an age property and an isActive property.",
+                "complex_type": true
+              },
+              {
+                "name": "minAge",
+                "type_name": "int",
+                "description": "minimum age of users to include in the report, and it filters out users with an age less than this value.",
+                "complex_type": false
+              },
+              {
+                "name": "includeInactive",
+                "type_name": "boolean",
+                "description": "boolean flag that determines whether to include inactive users or only active users in the report generation process.",
+                "complex_type": false
+              },
+              {
+                "name": "activityFilter",
+                "type_name": "Predicate<UserActivity>",
+                "description": "predicate used to filter user activities, allowing only those activities that satisfy the specified condition to be included in the report.\n\nFiltered by predicate, accepting user activities that match specific conditions. The exact condition is unknown due to deconstruction.",
+                "complex_type": true
+              }
+            ],
+            "returns": {
+              "type_name": "ListString",
+              "description": "a list of user activity reports.\n\nThe output is a list of strings. Each string represents a user's report activity. The list contains only users whose age is greater than or equal to the minimum age and either include inactive users or have active status.",
+              "complex_type": true
+            },
+            "name": "generateUserActivityReport",
+            "location": {
+              "start": 114,
+              "insert": 114,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 17,
+            "docLength": null
+          },
+          {
+            "id": "db7c60fa-a807-2980-0740-d5c894c799c8",
+            "ancestors": [
+              "75ce2fc2-ca31-1d8e-484a-82cb038bb506"
+            ],
+            "description": "Concatenates user information and a list of activities into a formatted string. The string includes the user's name, age, status, role, address, and a list of activities separated by dashes.",
+            "params": [
+              {
+                "name": "user",
+                "type_name": "User",
+                "description": "information to be formatted and appended to a string, including name, age, status, role, address, and activities.\n\nExtracts and includes user's name, age, status, role, and address in the output report.",
+                "complex_type": true
+              },
+              {
+                "name": "activities",
+                "type_name": "List<String>",
+                "description": "list of strings that are appended to the report as \"Activities\" with each activity preceded by a hyphen and separated by new lines.\n\nIterates over a list of strings; each string represents an activity.",
+                "complex_type": true
+              }
+            ],
+            "returns": {
+              "type_name": "String",
+              "description": "a formatted string containing user information and their activities.",
+              "complex_type": false
+            },
+            "name": "formatUserReport",
+            "location": {
+              "start": 132,
+              "insert": 132,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 11,
+            "docLength": null
+          },
+          {
+            "id": "d064bf67-f5b7-3087-b84c-db237003cd51",
+            "ancestors": [
+              "75ce2fc2-ca31-1d8e-484a-82cb038bb506"
+            ],
+            "description": "Generates a user activity report by filtering activities of users above a specified age (18) and excluding logout actions, then prints the filtered activities as strings.",
+            "params": [
+              {
+                "name": "args",
+                "type_name": "String[]",
+                "description": "command-line arguments passed to the program when it is executed.\n\nIt is an array of type `String`, containing multiple strings representing command-line arguments passed to the program.",
+                "complex_type": true
+              }
+            ],
+            "name": "main",
+            "location": {
+              "start": 144,
+              "insert": 144,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "method",
+            "length": 22,
+            "docLength": null
+          }
+        ]
+      }
+    }
   }
 ]

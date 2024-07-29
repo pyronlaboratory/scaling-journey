@@ -215,5 +215,228 @@
         ]
       }
     }
+  },
+  {
+    "name": "source.py",
+    "path": "source.py",
+    "content": {
+      "structured": {
+        "description": "An `User` class with attributes such as name, age, active status, role and address along with a list of activities performed by the user. It also defines two functions: one to format user activity data into a readable string, and another to generate a report for users above a certain age and optionally including inactive users and filtering out specific types of activities.",
+        "items": [
+          {
+            "id": "5a952bc7-9731-66a4-4143-f0d774517d5f",
+            "ancestors": [],
+            "description": "Defines an enumeration with three user role types: `ADMIN`, `USER`, and `GUEST`. Each type is represented by a descriptive string. This class provides a way to categorize users based on their roles, allowing for easy referencing and comparison of roles in the code.",
+            "attributes": [
+              {
+                "name": "ADMIN",
+                "type_name": "UserRole",
+                "description": "Assigned the string value \"Admin\". It represents a role with administrative privileges in the system."
+              },
+              {
+                "name": "USER",
+                "type_name": "UserRole",
+                "description": "4 characters long, representing a role with privileges. It has a string value \"User\"."
+              },
+              {
+                "name": "GUEST",
+                "type_name": "str",
+                "description": "6 characters long, having the value \"Guest\". It represents a role that grants limited access to system resources and functionality."
+              }
+            ],
+            "name": "UserRole",
+            "location": {
+              "start": 5,
+              "insert": 6,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "class",
+            "length": 4,
+            "docLength": null
+          },
+          {
+            "id": "767dddd7-c1ac-f4b0-3b43-12858e4a5e1c",
+            "ancestors": [],
+            "description": "Initializes a user with specified attributes: name, age, activity status, role, and associated data (address) and activities. The attributes are set as instance variables for later use. This class serves as a container to hold the relevant information about a user in an application.",
+            "attributes": [
+              {
+                "name": "name",
+                "type_name": "str",
+                "description": "Initialized with a value provided as input to the class constructor. It represents the name of the user."
+              },
+              {
+                "name": "age",
+                "type_name": "int",
+                "description": "Initialized during object creation with a value provided by the user. It represents the age of the user."
+              },
+              {
+                "name": "active",
+                "type_name": "bool",
+                "description": "Initialized with a boolean value. It represents whether the user's account is active or not."
+              },
+              {
+                "name": "role",
+                "type_name": "UserRole",
+                "description": "Initialized with a value provided by the user. It represents the role or position held by the user within a system, organization, or community."
+              },
+              {
+                "name": "address",
+                "type_name": "Dict[str,str]",
+                "description": "Initialized with a dictionary where keys are strings and values are also strings, representing user's address."
+              },
+              {
+                "name": "activities",
+                "type_name": "List[UserActivity]",
+                "description": "Initialized with a list of `UserActivity` objects. This allows for a user to have multiple activities associated with their account, such as hobbies or interests."
+              }
+            ],
+            "name": "User",
+            "location": {
+              "start": 12,
+              "insert": 13,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "class",
+            "length": 8,
+            "docLength": null
+          },
+          {
+            "id": "f63a7968-f03c-0cb7-2e48-131e18d4c0de",
+            "ancestors": [
+              "767dddd7-c1ac-f4b0-3b43-12858e4a5e1c"
+            ],
+            "description": "Initializes an object with various attributes, including name, age, activity status, role, address and activities. These attributes are assigned values provided as parameters to the constructor.",
+            "params": [
+              {
+                "name": "name",
+                "type_name": "str",
+                "description": "Used to set the name attribute of the class instance."
+              },
+              {
+                "name": "age",
+                "type_name": "int",
+                "description": "Assigned to an instance variable named `age`. It represents the age of the user."
+              },
+              {
+                "name": "active",
+                "type_name": "bool",
+                "description": "Used to set or get whether the user is active. It defaults to None but should be provided with either True or False when creating an instance of this class."
+              },
+              {
+                "name": "role",
+                "type_name": "UserRole",
+                "description": "Assigned to an instance variable named `self.role`."
+              },
+              {
+                "name": "address",
+                "type_name": "Dict[str, str]",
+                "description": "Initialized with an empty dictionary. It represents a user's address as a collection of key-value pairs where keys are strings (e.g., street, city) and values are also strings."
+              },
+              {
+                "name": "activities",
+                "type_name": "List[UserActivity]",
+                "description": "Expected to be initialized with a list of objects, each representing an activity of a user."
+              }
+            ],
+            "usage": {
+              "language": "python",
+              "code": "user = User(\"John Doe\", 30, True, UserRole.ADMINISTRATOR, {\"street\": \"123 Main St\", \"city\": \"Anytown\"}, [UserActivity.SPORTS, UserActivity.MUSIC])",
+              "description": ""
+            },
+            "name": "__init__",
+            "location": {
+              "start": 13,
+              "insert": 14,
+              "offset": " ",
+              "indent": 8,
+              "comment": null
+            },
+            "item_type": "constructor",
+            "length": 7,
+            "docLength": null
+          },
+          {
+            "id": "c47826c1-ac5f-2c80-574d-666aa90cacb3",
+            "ancestors": [],
+            "description": "Converts a tuple containing user information into a formatted string, displaying the username, action taken, and date of activity in 'YYYY-MM-DD' format.",
+            "params": [
+              {
+                "name": "activity",
+                "type_name": "UserActivity",
+                "description": "Expected to be an iterable, likely a tuple or list, containing at least three elements: username, action, and date."
+              }
+            ],
+            "returns": {
+              "type_name": "str",
+              "description": "A formatted string representing an activity by a user, comprising the username, action taken, and date on which it was performed."
+            },
+            "usage": {
+              "language": "python",
+              "code": "activity = (\"John\", \"logged in\", datetime.date(2023, 3, 20))\noutput = format_activity(activity)\n",
+              "description": ""
+            },
+            "name": "format_activity",
+            "location": {
+              "start": 21,
+              "insert": 22,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 3,
+            "docLength": null
+          },
+          {
+            "id": "d6de09c7-f163-039f-6241-a8cc4619d801",
+            "ancestors": [],
+            "description": "Generates a list of dictionaries representing user activity reports from a given list of users, filtered by age and active/inactive status, with optional inclusion of inactive users and custom activity filtering.",
+            "params": [
+              {
+                "name": "users",
+                "type_name": "List[User]",
+                "description": "Mandatory. It represents a collection of User objects."
+              },
+              {
+                "name": "min_age",
+                "type_name": "int",
+                "description": "18 by default. It filters users based on their age, only including those who are at least this age in the report.",
+                "default_value": "18"
+              },
+              {
+                "name": "options",
+                "type_name": "Optional[Dict[str, Optional[Callable[[UserActivity], bool]]]]",
+                "description": "0-indexed. It specifies filters for the report generation: whether to include inactive users and an activity filter.",
+                "default_value": "None"
+              }
+            ],
+            "returns": {
+              "type_name": "List[Dict[str, str]]",
+              "description": "A list of dictionaries representing user activity reports. Each dictionary contains information about a user such as their name, age, role, address, and activities they have performed."
+            },
+            "usage": {
+              "language": "python",
+              "code": "users = [User('John', 25, True, 'admin', {'street': '123', 'city': 'New York', 'country': 'USA'}, [Activity('swimming'), Activity('running')]), \n         User('Alice', 30, False, 'moderator', {'street': '456', 'city': 'London', 'country': 'UK'}, [Activity('reading'), Activity('writing')])]\nfiltered_users = generate_user_activity_report(users)\n",
+              "description": ""
+            },
+            "name": "generate_user_activity_report",
+            "location": {
+              "start": 25,
+              "insert": 30,
+              "offset": " ",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 25,
+            "docLength": null
+          }
+        ]
+      }
+    }
   }
 ]

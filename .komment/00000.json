@@ -122,41 +122,41 @@
     "path": "source.js",
     "content": {
       "structured": {
-        "description": "A generateUserReport function that filters and transforms an array of users based on input parameters. The function uses JavaScript's built-in Date object and regular expressions to format dates according to a specified date format. It then returns an array of user objects with their name, age, active status, and registration date formatted as per the provided date format.",
+        "description": "A function that generates a report on users based on certain criteria. The function takes in an array of user objects and optional parameters for minimum age, include inactive users, and date format. It filters the user data based on the specified conditions and maps each user object to include name, age, active status, and registration date formatted according to the provided date format.",
         "items": [
           {
-            "id": "d53cbba0-24f7-218c-4847-20615ae69f95",
+            "id": "fa318344-f1fc-9989-9948-eea534ecc086",
             "ancestors": [],
-            "description": "Generates a report for users based on their age and activity status. It filters out users under a specified minimum age (default is 18) and inactive users unless explicitly included. The report includes the user's name, age, activity status, and registration date in a formatted string.",
+            "description": "Generates a report for users who are at least a specified minimum age and meet certain criteria for activity status. The report includes user name, age, activity status, and registration date in a specific format.",
             "params": [
               {
                 "name": "users",
                 "optional": false,
-                "type_name": "User[]",
-                "description": "Required for report generation."
+                "type_name": "object",
+                "description": "Expected to be an array of user objects."
               },
               {
                 "name": "minAge",
                 "optional": true,
                 "type_name": "number",
-                "description": "Used to filter users based on their age.",
+                "description": "Used to filter users by age.",
                 "default_value": "18"
               },
               {
                 "name": "options",
                 "optional": true,
                 "type_name": "object",
-                "description": "Optional.",
+                "description": "Used to specify additional options for generating the report.",
                 "default_value": "{}"
               }
             ],
             "returns": {
-              "type_name": "object",
-              "description": "An array of objects containing properties name, age, active and registrationDate for users who meet specified conditions."
+              "type_name": "UserReport",
+              "description": "An array of objects. Each object represents a user and contains properties name, age, active status, and registration date in the specified format."
             },
             "usage": {
               "language": "javascript",
-              "code": "const users = [\n  { name: 'John', age: 25, active: true, registrationDate: new Date('2020-01-01') },\n  { name: 'Jane', age: 30, active: false, registrationDate: new Date('2019-06-15') }\n];\n\nconst report = generateUserReport(users);\n",
+              "code": "const users = [\n  { name: 'John', age: 22, active: true, registrationDate: \"2020-03-01\" },\n  { name: 'Jane', age: 30, active: false, registrationDate: \"2018-02-15\" }\n];\n\nconst result = generateUserReport(users);\n",
               "description": ""
             },
             "name": "generateUserReport",
@@ -172,33 +172,33 @@
             "docLength": null
           },
           {
-            "id": "cc00b37d-10a0-bebc-3444-f2ae98deeef4",
+            "id": "1e8a4eb3-36fd-00ab-4445-67c42e408b43",
             "ancestors": [
-              "d53cbba0-24f7-218c-4847-20615ae69f95"
+              "fa318344-f1fc-9989-9948-eea534ecc086"
             ],
-            "description": "Takes a date and a format string as input, converts the date to a human-readable format, and returns a string representing the formatted date based on the provided format string.",
+            "description": "Formats a date string according to a specified format, replacing 'YYYY' with the full year, 'MM' with the two-digit month, and 'DD' with the two-digit day, padding single digits with zeros if necessary.",
             "params": [
               {
                 "name": "date",
                 "optional": false,
                 "type_name": "number",
-                "description": "The date to be formatted."
+                "description": "13 digits, representing a timestamp in seconds since 1970."
               },
               {
                 "name": "format",
                 "optional": false,
                 "type_name": "string",
-                "description": "Used to define the output date format."
+                "description": "Used for formatting date."
               }
             ],
             "returns": {
               "type_name": "string",
-              "description": "A formatted date representation according to the specified format, replacing placeholders 'YYYY' with the year, 'MM' with the month and 'DD' with the day in the original date."
+              "description": "A formatted date representation based on the provided format and the original date."
             },
             "usage": {
               "language": "javascript",
-              "code": "var result = formatDate('2021-05-27', 'YYYY-MM-DD');\n",
-              "description": "\nReturn a string formatted according to the provided date and format."
+              "code": "const result = formatDate('2023-03-01', 'YYYY-MM-DD');\n",
+              "description": ""
             },
             "name": "formatDate",
             "location": {

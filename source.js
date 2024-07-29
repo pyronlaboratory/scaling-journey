@@ -1,33 +1,32 @@
 /**
- * @description Generates a report for users based on their age and activity status.
- * It filters out users under a specified minimum age (default is 18) and inactive
- * users unless explicitly included. The report includes the user's name, age, activity
- * status, and registration date in a formatted string.
+ * @description Generates a report for users who are at least a specified minimum age
+ * and meet certain criteria for activity status. The report includes user name, age,
+ * activity status, and registration date in a specific format.
  *
- * @param {User[]} users - Required for report generation.
+ * @param {object} users - Expected to be an array of user objects.
  *
- * @param {number} minAge - Used to filter users based on their age.
+ * @param {number} minAge - Used to filter users by age.
  *
- * @param {object} options - Optional.
+ * @param {object} options - Used to specify additional options for generating the report.
  *
- * @returns {object} An array of objects containing properties name, age, active and
- * registrationDate for users who meet specified conditions.
+ * @returns {UserReport} An array of objects. Each object represents a user and
+ * contains properties name, age, active status, and registration date in the specified
+ * format.
  */
 function generateUserReport(users, minAge = 18, options = {}) {
   const { includeInactive = false, dateFormat = 'YYYY-MM-DD' } = options;
   
   /**
-   * @description Takes a date and a format string as input, converts the date to a
-   * human-readable format, and returns a string representing the formatted date based
-   * on the provided format string.
+   * @description Formats a date string according to a specified format, replacing
+   * 'YYYY' with the full year, 'MM' with the two-digit month, and 'DD' with the two-digit
+   * day, padding single digits with zeros if necessary.
    *
-   * @param {number} date - The date to be formatted.
+   * @param {number} date - 13 digits, representing a timestamp in seconds since 1970.
    *
-   * @param {string} format - Used to define the output date format.
+   * @param {string} format - Used for formatting date.
    *
-   * @returns {string} A formatted date representation according to the specified format,
-   * replacing placeholders 'YYYY' with the year, 'MM' with the month and 'DD' with the
-   * day in the original date.
+   * @returns {string} A formatted date representation based on the provided format and
+   * the original date.
    */
   function formatDate(date, format) {
     const d = new Date(date);

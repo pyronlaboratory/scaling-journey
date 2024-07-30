@@ -4,27 +4,27 @@
     "path": "App.tsx",
     "content": {
       "structured": {
-        "description": "An enum for user roles and a tuple type for user activity. It also defines a User type with nested objects and intersection types, as well as a Props type with generics and default values. The code then creates a React functional component, UserActivityReport, that filters and maps users based on criteria and renders their activities in a report format using the JSX syntax.",
+        "description": "An enum and type definitions for user roles and activities, respectively. It then combines these into a `User` type with nested objects and intersection types. The `Props` type is defined with generics and default values, which is used as the prop type for a React functional component called `UserActivityReport`.",
         "items": [
           {
-            "id": "815cf3ec-9295-0d8d-9d40-b6884999b83d",
+            "id": "77f2fd42-f686-0697-e649-fe505444851a",
             "ancestors": [],
-            "description": "Takes a user activity object as input and returns a formatted string representing the activity. The activity is composed of a username, action, and date. The function concatenates these components into a human-readable string with the date converted to a localized string representation.",
+            "description": "Takes an object `activity` with three properties: `username`, `action`, and `date`. It returns a formatted string describing the activity, combining these properties with a specific format. The date is converted to a localized string using the `toLocaleDateString()` method.",
             "params": [
               {
                 "name": "activity",
                 "optional": false,
                 "type_name": "UserActivity",
-                "description": "Processed into a formatted string."
+                "description": "Required for formatting."
               }
             ],
             "returns": {
               "type_name": "string",
-              "description": "A formatted activity log message. The returned string combines username, action, and date in the specified format."
+              "description": "A formatted message representing an activity performed by a user, including their username, action taken, and date in a specified format."
             },
             "usage": {
               "language": "typescript",
-              "code": "formatActivity([\"John\", \"created\", new Date(2022, 5, 12)]);\n",
+              "code": "const activity = [\"john\", \"edited\", new Date()];\nformatActivity(activity); // Returns: \"john performed edited on [date]\"",
               "description": ""
             },
             "name": "formatActivity",
@@ -40,43 +40,43 @@
             "docLength": null
           },
           {
-            "id": "cd7df3c2-f130-2ab3-be4a-93425417fbd5",
+            "id": "9c922ec7-e9b6-b7b1-7445-906d20a3e253",
             "ancestors": [],
-            "description": "Filters and maps a list of users based on age and activity criteria, then renders a report displaying user information, including their name, role, age, address, status, and activities.",
+            "description": "Filters and maps a list of users based on their age, activity status, and specific activities, then renders a report displaying user information and their corresponding activities.",
             "params": [
               {
                 "name": "obj",
                 "optional": false,
                 "type_name": "object",
-                "description": "Non-optional. It has two properties: `users`, which is an array, and `options`. The `users` property corresponds to a set of user objects, while `options` contains nested properties for filtering users and activities."
+                "description": "Non-optional. It contains two properties: 'users' and 'options'. The 'users' property expects an array, and it's default value is not defined. The 'options' property also expects an object, with nested objects inside."
               },
               {
                 "name": "obj.users",
                 "optional": false,
                 "type_name": "User[]",
-                "description": "Required for rendering user activity reports."
+                "description": "Used to filter and render user activity reports."
               },
               {
                 "name": "obj.minAge",
                 "optional": true,
                 "type_name": "number",
-                "description": "Used to filter users by age.",
+                "description": "Used to filter users based on their age.",
                 "default_value": "18"
               },
               {
                 "name": "obj.options",
                 "optional": false,
                 "type_name": "{\n    includeInactive = defaultOptions.includeInactive,\n    activityFilter = defaultOptions.activityFilter,\n  } = defaultOptions",
-                "description": "Optional, it allows to customize report generation with filtering and excluding inactive users."
+                "description": "Used to customize filtering and sorting of user data."
               }
             ],
             "returns": {
-              "type_name": "JSX.Element",
-              "description": "A React component representing a report containing information about multiple users, including their activities. The component consists of a list of user cards with details and a list of activities for each user."
+              "type_name": "React.ReactElement",
+              "description": "A JSX element representing the user activity report, including a list of users with their activities, sorted by age and filtered based on the criteria specified in the props."
             },
             "usage": {
               "language": "typescript",
-              "code": "const users = [\n  {\n    name: 'John Doe',\n    role: 'User',\n    age: 25,\n    active: true,\n    address: { street: '123 Main', city: 'Anytown', country: 'USA' },\n    activities: [{ type: 'read', description: 'Read a book' }, { type: 'run', description: 'Go for a run' }],\n  },\n];\n\n<UserActivityReport users={users} />;\n",
+              "code": "<UserActivityReport users={[{name: 'John', age: 20, role: 'Developer', active: true, activities: ['Coding', 'Testing']},{name: 'Mary', age: 25, role: 'Designer', active: false, activities: ['Designing', 'Prototyping']}]} />",
               "description": ""
             },
             "name": "UserActivityReport",
@@ -92,13 +92,13 @@
             "docLength": null
           },
           {
-            "id": "c5f1e831-b381-4fbd-d14a-aaec84e8e47c",
+            "id": "513a239b-ab8d-8fa2-a449-f102f07a5b29",
             "ancestors": [],
-            "description": "Renders a user interface with a heading \"User Activity Report\" and passes `users`, `minAge`, and options to a `UserActivityReport` component for rendering. The options include an activity filter that excludes 'logout' actions when calculating the report.",
+            "description": "Renders a React component with a title \"User Activity Report\" and passes three props to the `UserActivityReport` component: an array of users, a minimum age (18), and options for filtering user activity.",
             "params": [],
             "usage": {
               "language": "typescript",
-              "code": "const users = [\n  { id: 1, name: 'John', age: 22 },\n  { id: 2, name: 'Alice', age: 25 },\n  { id: 3, name: 'Bob', age: 17 }\n];\n<App users={users} />;\n",
+              "code": "const users = [...]; // List of users with their activities and age\nReact.render(<App users={users} />, document.getElementById('root'));\n",
               "description": ""
             },
             "name": "App",

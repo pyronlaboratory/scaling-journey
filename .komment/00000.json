@@ -4,27 +4,27 @@
     "path": "App.tsx",
     "content": {
       "structured": {
-        "description": "A React application that generates a user activity report. The report includes a list of users with their name, role, address, and activities such as login, logout, and purchase. The code uses an enum for user roles, a tuple type for user activities, and an intersection type for the User object.",
+        "description": "An enum for user roles and a tuple type for user activity. It also defines a User type with nested objects and intersection types, as well as a Props type with generics and default values. The code then creates a React functional component, UserActivityReport, that filters and maps users based on criteria and renders their activities in a report format using the JSX syntax.",
         "items": [
           {
-            "id": "bd010041-eabe-37b3-1b44-efe824488c21",
+            "id": "815cf3ec-9295-0d8d-9d40-b6884999b83d",
             "ancestors": [],
-            "description": "Converts a user activity object into a string representation. It takes an array-like object with three properties: username, action, and date. The function returns a formatted string combining these properties, displaying the username, action, and date of the activity in a human-readable format.",
+            "description": "Takes a user activity object as input and returns a formatted string representing the activity. The activity is composed of a username, action, and date. The function concatenates these components into a human-readable string with the date converted to a localized string representation.",
             "params": [
               {
                 "name": "activity",
                 "optional": false,
                 "type_name": "UserActivity",
-                "description": "Used to format user activity information."
+                "description": "Processed into a formatted string."
               }
             ],
             "returns": {
               "type_name": "string",
-              "description": "A formatted message indicating the username, action and date of an activity."
+              "description": "A formatted activity log message. The returned string combines username, action, and date in the specified format."
             },
             "usage": {
               "language": "typescript",
-              "code": "const userActivity = [\"John\", \"edited\", new Date(\"2021-08-25T14:30:00Z\")];\nformatActivity(userActivity);\n",
+              "code": "formatActivity([\"John\", \"created\", new Date(2022, 5, 12)]);\n",
               "description": ""
             },
             "name": "formatActivity",
@@ -40,21 +40,21 @@
             "docLength": null
           },
           {
-            "id": "1840ec05-01f0-7fbd-b94e-21d24279c7c2",
+            "id": "cd7df3c2-f130-2ab3-be4a-93425417fbd5",
             "ancestors": [],
-            "description": "Filters users based on their age and activity status, then maps them to a report format displaying user information and their activities. The report is rendered as an unordered list with each user's details and activities listed individually.",
+            "description": "Filters and maps a list of users based on age and activity criteria, then renders a report displaying user information, including their name, role, age, address, status, and activities.",
             "params": [
               {
                 "name": "obj",
                 "optional": false,
                 "type_name": "object",
-                "description": "2 level nested. It contains two properties: 'users' and 'options'. The 'users' property expects an array, while the 'options' property is an object with default values for 'includeInactive' and 'activityFilter'."
+                "description": "Non-optional. It has two properties: `users`, which is an array, and `options`. The `users` property corresponds to a set of user objects, while `options` contains nested properties for filtering users and activities."
               },
               {
                 "name": "obj.users",
                 "optional": false,
-                "type_name": "UserActivityReportProps['users']",
-                "description": "An array of user objects."
+                "type_name": "User[]",
+                "description": "Required for rendering user activity reports."
               },
               {
                 "name": "obj.minAge",
@@ -67,16 +67,16 @@
                 "name": "obj.options",
                 "optional": false,
                 "type_name": "{\n    includeInactive = defaultOptions.includeInactive,\n    activityFilter = defaultOptions.activityFilter,\n  } = defaultOptions",
-                "description": "Optional, which means that if it's not passed as an argument when calling this function, then it will have its default values."
+                "description": "Optional, it allows to customize report generation with filtering and excluding inactive users."
               }
             ],
             "returns": {
               "type_name": "JSX.Element",
-              "description": "A React component that represents a user activity report. The report consists of a list of user cards with their name, role, age, address and activities. Each user card includes details about the user's status and the activities they are involved in."
+              "description": "A React component representing a report containing information about multiple users, including their activities. The component consists of a list of user cards with details and a list of activities for each user."
             },
             "usage": {
               "language": "typescript",
-              "code": "const users = [\n  { name: 'John', role: 'Admin', age: 25, active: true, activities: ['Swimming', 'Golf'] },\n  { name: 'Jane', role: 'User', age: 30, active: false, activities: [] },\n];\n\n<UserActivityReport users={users} />\n",
+              "code": "const users = [\n  {\n    name: 'John Doe',\n    role: 'User',\n    age: 25,\n    active: true,\n    address: { street: '123 Main', city: 'Anytown', country: 'USA' },\n    activities: [{ type: 'read', description: 'Read a book' }, { type: 'run', description: 'Go for a run' }],\n  },\n];\n\n<UserActivityReport users={users} />;\n",
               "description": ""
             },
             "name": "UserActivityReport",
@@ -92,14 +92,14 @@
             "docLength": null
           },
           {
-            "id": "39a4a38b-ae40-ee92-1c46-0eafb8ddc23a",
+            "id": "c5f1e831-b381-4fbd-d14a-aaec84e8e47c",
             "ancestors": [],
-            "description": "Renders a user interface with an `<h1>` element displaying \"User Activity Report\". It also renders a `UserActivityReport` component, passing in `users`, `minAge=18`, and an object containing options: `includeInactive=true` and a filter function that excludes 'logout' actions.",
+            "description": "Renders a user interface with a heading \"User Activity Report\" and passes `users`, `minAge`, and options to a `UserActivityReport` component for rendering. The options include an activity filter that excludes 'logout' actions when calculating the report.",
             "params": [],
             "usage": {
               "language": "typescript",
-              "code": "const users = [\n    { name: 'John', age: 25, action: 'login' },\n    { name: 'Jane', age: 30, action: 'logout' }\n];\n\n<App users={users} />\n",
-              "description": "\nPasses an array of user objects to the component."
+              "code": "const users = [\n  { id: 1, name: 'John', age: 22 },\n  { id: 2, name: 'Alice', age: 25 },\n  { id: 3, name: 'Bob', age: 17 }\n];\n<App users={users} />;\n",
+              "description": ""
             },
             "name": "App",
             "location": {
@@ -122,41 +122,41 @@
     "path": "source.js",
     "content": {
       "structured": {
-        "description": "A function that generates a report on users based on certain criteria. The function takes in an array of user objects and optional parameters for minimum age, include inactive users, and date format. It filters the user data based on the specified conditions and maps each user object to include name, age, active status, and registration date formatted according to the provided date format.",
+        "description": "A function generateUserReport that generates a report on users based on certain conditions. The function filters users by age and activity status, then maps each user object to a new format including name, age, active status, and registration date. The registration date is formatted according to the specified date format using the formatDate function.",
         "items": [
           {
-            "id": "fa318344-f1fc-9989-9948-eea534ecc086",
+            "id": "75990936-0f25-38b7-2b4e-c5b77019600c",
             "ancestors": [],
-            "description": "Generates a report for users who are at least a specified minimum age and meet certain criteria for activity status. The report includes user name, age, activity status, and registration date in a specific format.",
+            "description": "Generates a report for users based on specified criteria. It filters users by age and activity status, and formats their registration dates according to a user-defined date format. The resulting report includes user name, age, activity status, and formatted registration date.",
             "params": [
               {
                 "name": "users",
                 "optional": false,
-                "type_name": "object",
-                "description": "Expected to be an array of user objects."
+                "type_name": "user[]",
+                "description": "An array of user objects."
               },
               {
                 "name": "minAge",
                 "optional": true,
                 "type_name": "number",
-                "description": "Used to filter users by age.",
+                "description": "Used to filter users based on their age.",
                 "default_value": "18"
               },
               {
                 "name": "options",
                 "optional": true,
                 "type_name": "object",
-                "description": "Used to specify additional options for generating the report.",
+                "description": "Optional, which can be used to customize the report generation process.",
                 "default_value": "{}"
               }
             ],
             "returns": {
-              "type_name": "UserReport",
-              "description": "An array of objects. Each object represents a user and contains properties name, age, active status, and registration date in the specified format."
+              "type_name": "object",
+              "description": "An array of objects with properties name, age, active, and registrationDate. Each object represents a user meeting certain criteria."
             },
             "usage": {
               "language": "javascript",
-              "code": "const users = [\n  { name: 'John', age: 22, active: true, registrationDate: \"2020-03-01\" },\n  { name: 'Jane', age: 30, active: false, registrationDate: \"2018-02-15\" }\n];\n\nconst result = generateUserReport(users);\n",
+              "code": "const users = [\n  { name: 'Alice', age: 25, active: true, registrationDate: '2020-01-01' },\n  { name: 'Bob', age: 17, active: false, registrationDate: '2019-06-15' },\n  { name: 'Charlie', age: 30, active: true, registrationDate: '2018-03-20' }\n];\n\nconst report = generateUserReport(users);\n",
               "description": ""
             },
             "name": "generateUserReport",
@@ -172,33 +172,33 @@
             "docLength": null
           },
           {
-            "id": "1e8a4eb3-36fd-00ab-4445-67c42e408b43",
+            "id": "a9f11952-4bff-289c-b540-61a81c751a9b",
             "ancestors": [
-              "fa318344-f1fc-9989-9948-eea534ecc086"
+              "75990936-0f25-38b7-2b4e-c5b77019600c"
             ],
-            "description": "Formats a date string according to a specified format, replacing 'YYYY' with the full year, 'MM' with the two-digit month, and 'DD' with the two-digit day, padding single digits with zeros if necessary.",
+            "description": "Converts a date into a specified string format. It takes a date and a format as inputs, extracts the day, month, and year from the date, formats them according to the input format, and returns the formatted string.",
             "params": [
               {
                 "name": "date",
                 "optional": false,
-                "type_name": "number",
-                "description": "13 digits, representing a timestamp in seconds since 1970."
+                "type_name": "string",
+                "description": "Expected to represent a date."
               },
               {
                 "name": "format",
                 "optional": false,
                 "type_name": "string",
-                "description": "Used for formatting date."
+                "description": "Used to define the desired output format."
               }
             ],
             "returns": {
               "type_name": "string",
-              "description": "A formatted date representation based on the provided format and the original date."
+              "description": "A formatted date in accordance with the specified format. The returned string replaces placeholders 'YYYY', 'MM', and 'DD' with corresponding year, month, and day values, respectively."
             },
             "usage": {
               "language": "javascript",
-              "code": "const result = formatDate('2023-03-01', 'YYYY-MM-DD');\n",
-              "description": ""
+              "code": "const result = formatDate('2023-07-25', 'YYYY-MM-DD');\n",
+              "description": "\nThe result will be: '2023-07-25'"
             },
             "name": "formatDate",
             "location": {
@@ -221,27 +221,27 @@
     "path": "source.py",
     "content": {
       "structured": {
-        "description": "An application that generates a report on user activities for a list of users. The report includes information such as user name, age, active status, role, and address, along with a filtered list of their activities. The filtering is done based on a minimum age and optional settings to include inactive users and filter out specific types of activities.",
+        "description": "Classes and functions related to user management and activity reporting. It utilizes the `Enum` class from the built-in `enum` module to define a set of roles for users. The `User` class represents individual users with attributes such as name, age, active status, role, address, and activities. The `generate_user_activity_report` function generates a report of user activities based on given filters, including minimum age and activity types.",
         "items": [
           {
-            "id": "5cb6561e-c7e0-74b3-5744-8bc0d0d11d14",
+            "id": "c587f9dc-9b3d-3386-8647-a24702e0ffdb",
             "ancestors": [],
-            "description": "Defines an enumeration for user roles, which are ADMIN, USER, and GUEST. Each role is represented by a unique string value. This allows for a clear and concise way to define and refer to these roles within the program.",
+            "description": "Defines an enumeration type with three values: `ADMIN`, `USER`, and `GUEST`. Each value is associated with a string label, allowing for descriptive references to user roles within the application. This implementation enables type-safe and readable handling of user role data.",
             "attributes": [
               {
                 "name": "ADMIN",
                 "type_name": "UserRole",
-                "description": "Assigned a value of \"Admin\". It represents one of the possible user roles in the system, specifically an administrative role with elevated privileges."
+                "description": "Assigned the value \"Admin\". It is an enumeration member that represents the role of an administrator."
               },
               {
                 "name": "USER",
                 "type_name": "UserRole",
-                "description": "4 characters long, representing a user role with value \"User\"."
+                "description": "4 characters long, representing a user role with a string value \"User\"."
               },
               {
                 "name": "GUEST",
                 "type_name": "str",
-                "description": "5 characters long. It represents a predefined role in the system, denoted as \"Guest\", which likely signifies that the user does not have any specific permissions or access rights."
+                "description": "5 characters long, representing a user role with name 'Guest' and value 'Guest'. It is one of three roles defined by this Enum class: Admin, User, Guest."
               }
             ],
             "name": "UserRole",
@@ -257,39 +257,39 @@
             "docLength": null
           },
           {
-            "id": "f8dcea85-5e8d-ccb9-2c43-f2dcf0e43fd8",
+            "id": "6edf12ee-80d6-e080-a140-4a6a493d229c",
             "ancestors": [],
-            "description": "Initializes a user with attributes: name, age, activity status, role, address, and activities. It represents a complex user profile, incorporating multiple details that can be accessed or modified later.",
+            "description": "Initializes a user object with attributes such as name, age, activity status, role, and address. It also includes a list of activities. This class provides a structure for representing users in an application.",
             "attributes": [
               {
                 "name": "name",
                 "type_name": "str",
-                "description": "Initialized with a given string value during object creation."
+                "description": "Initialized with a given name when creating an instance of the class."
               },
               {
                 "name": "age",
                 "type_name": "int",
-                "description": "Initialized with an integer value during object creation through the `__init__` method. It represents a user's age, which can be any positive or zero integer."
+                "description": "Initialized with a given integer value during object creation. It represents the age of a user."
               },
               {
                 "name": "active",
                 "type_name": "bool",
-                "description": "Initialized through the constructor with a value passed as parameter. It indicates whether the user's account is active or not, allowing for filtering or processing based on this status."
+                "description": "Used to track whether a user's account is currently active or not."
               },
               {
                 "name": "role",
                 "type_name": "UserRole",
-                "description": "Used to store the user's role, likely indicating their permissions or privileges within a system or application."
+                "description": "Assigned during initialization. It represents the user's role, which could be a predefined set of roles, such as administrator, moderator, or regular user."
               },
               {
                 "name": "address",
                 "type_name": "Dict[str,str]",
-                "description": "Initialized with a dictionary that maps strings to strings, representing the user's address details, where each key-value pair represents a specific piece of information about their address."
+                "description": "Expected to contain a dictionary where the keys are strings and the values are also strings, representing the user's address information."
               },
               {
                 "name": "activities",
                 "type_name": "List[UserActivity]",
-                "description": "Used to store a list of user activities."
+                "description": "Initialized in the constructor with the provided argument. It represents a collection of user activities, each activity being an instance of the UserActivity class."
               }
             ],
             "name": "User",
@@ -305,46 +305,46 @@
             "docLength": null
           },
           {
-            "id": "e53a74eb-3c06-7c96-7044-b3b36e0f0753",
+            "id": "d583a358-24e0-51a2-bb41-01df25dd0ab5",
             "ancestors": [
-              "f8dcea85-5e8d-ccb9-2c43-f2dcf0e43fd8"
+              "6edf12ee-80d6-e080-a140-4a6a493d229c"
             ],
-            "description": "Initializes objects with given parameters: name, age, active status, role, address (a dictionary), and activities (a list). These attributes are assigned to corresponding instance variables for further use within the class.",
+            "description": "Initializes objects with provided parameters: name, age, active status, role, address as a dictionary, and activities as a list. It sets instance variables to these values, allowing for user object creation with specific attributes.",
             "params": [
               {
                 "name": "name",
                 "type_name": "str",
-                "description": "Assigned to an instance variable with the same name. It represents a string value, likely a user's full or nickname."
+                "description": "Assigned to an instance variable named `self.name`. It represents the name of the user."
               },
               {
                 "name": "age",
                 "type_name": "int",
-                "description": "Assigned to an instance variable with the same name. It represents the age of the user as an integer value."
+                "description": "Required to initialize an object of the class. It represents a user's age, which must be an integer value."
               },
               {
                 "name": "active",
                 "type_name": "bool",
-                "description": "Assigned a boolean value indicating whether the user's account is active or not."
+                "description": "Used to represent whether the user is active or not."
               },
               {
                 "name": "role",
                 "type_name": "UserRole",
-                "description": "Assigned to an instance variable named `self.role`. It represents the role of the user, possibly indicating their position or status within an organization."
+                "description": "Assigned to an instance variable with the same name. The specific details of this role are not specified, but it appears to be an enumeration or an abstract class that represents different user roles."
               },
               {
                 "name": "address",
                 "type_name": "Dict[str, str]",
-                "description": "Used to store the user's address information, where keys are field names (e.g., \"street\", \"city\", etc.) and values are corresponding field values."
+                "description": "Expected to be a dictionary where keys are strings and values are also strings. It represents the user's address."
               },
               {
                 "name": "activities",
                 "type_name": "List[UserActivity]",
-                "description": "Initialized with an empty list. It represents a collection of UserActivity objects, which are presumably instances of a custom class representing specific user activities or habits."
+                "description": "Expected to hold a list of user activity objects."
               }
             ],
             "usage": {
               "language": "python",
-              "code": "user1 = User(\"John\", 25, True, UserRole.ADMINISTRATOR, {\"street\": \"123 Main St\"}, [UserActivity.RUNNING, UserActivity.SWIMING])",
+              "code": "user = User(\"John Doe\", 30, True, UserRole.ADMIN, {\"street\": \"123 Main St\", \"city\": \"Anytown\"}, [UserActivity.HIKING, UserActivity.COOKING])",
               "description": ""
             },
             "name": "__init__",
@@ -360,23 +360,23 @@
             "docLength": null
           },
           {
-            "id": "03d368aa-c63d-4fb2-8c49-967b8e4f6d99",
+            "id": "25d399c2-890a-ecb3-1d45-d1b6ce6b2546",
             "ancestors": [],
-            "description": "Takes a tuple representing user activity as input and returns a formatted string describing the activity. It extracts username, action, and date from the tuple, then combines them into a sentence with the specified date format.",
+            "description": "Takes a tuple containing user activity data (username, action, date) and returns a formatted string representing the activity. The date is converted to the format 'YYYY-MM-DD' before being included in the output string.",
             "params": [
               {
                 "name": "activity",
                 "type_name": "UserActivity",
-                "description": "Unpacked into three variables: username, action, and date."
+                "description": "Unpacked into three variables: `username`, `action`, and `date`. This indicates that `activity` is an object with at least three attributes or properties."
               }
             ],
             "returns": {
               "type_name": "str",
-              "description": "A formatted string representing an activity, consisting of a username, action, and date. The format is \"{username} performed {action} on {date}\"."
+              "description": "A formatted string that describes an activity performed by a user. The string includes the username, action, and date of the activity, in the format \"username performed action on YYYY-MM-DD\"."
             },
             "usage": {
               "language": "python",
-              "code": "activity = (\"John\", \"logged in\", datetime.date(2023, 3, 22))\nformatted_activity = format_activity(activity)\n",
+              "code": "activity = (\"JohnDoe\", \"visited\", datetime.date(2022, 1, 12))\nformatted_string = format_activity(activity)",
               "description": ""
             },
             "name": "format_activity",
@@ -392,35 +392,35 @@
             "docLength": null
           },
           {
-            "id": "92b9795c-2d29-25b1-3a45-c71eaff76fe8",
+            "id": "8cbbbbc6-8bab-7fb0-8046-3ff293522917",
             "ancestors": [],
-            "description": "Generates a list of dictionaries, each representing a user's activity report. It filters users by age and activity status (active or inactive), applies an optional activity filter, and includes relevant information such as name, role, address, and activities.",
+            "description": "Generates a list of dictionaries, each representing a user's activity report. The report includes user details, such as name, age, and role, along with their activities. It filters users by minimum age and optionally includes inactive users.",
             "params": [
               {
                 "name": "users",
                 "type_name": "List[User]",
-                "description": "Required to generate a report for one or more users. It can contain multiple instances of User objects."
+                "description": "Required to generate the report. It takes in a list of User objects, which are then processed and formatted into a report."
               },
               {
                 "name": "min_age",
                 "type_name": "int",
-                "description": "18 by default. It filters users based on their age, allowing only those with an age greater than or equal to `min_age` to be included in the report.",
+                "description": "18 by default. It filters users based on their age, including only those who are at least as old as this minimum age specified.",
                 "default_value": "18"
               },
               {
                 "name": "options",
                 "type_name": "Optional[Dict[str, Optional[Callable[[UserActivity], bool]]]]",
-                "description": "Defaulted to an empty dictionary. It allows users to specify additional filtering criteria for user activities and whether inactive users should be included in the report.",
+                "description": "Optional by default. It filters users based on the presence of inactive users and activities that match a specified filter.",
                 "default_value": "None"
               }
             ],
             "returns": {
               "type_name": "List[Dict[str, str]]",
-              "description": "A list of dictionaries. Each dictionary represents a user's information and contains the following keys: \"name\", \"age\", \"active\", \"role\", \"address\", and \"activities\"."
+              "description": "A list of dictionaries containing information about users, including their name, age, activity status, role, address and activities they have done."
             },
             "usage": {
               "language": "python",
-              "code": "users = [User(\"John\", 25, True, Role.ADMIN, {\"street\": \"123 Main St\", \"city\": \"Anytown\", \"country\": \"USA\"}, [Activity(\"swimming\"), Activity(\"hiking\")]),\n         User(\"Jane\", 17, False, Role.USER, {\"street\": \"456 Elm St\", \"city\": \"Othertown\", \"country\": \"Canada\"}, [])]\nfiltered_report = generate_user_activity_report(users)\n",
+              "code": "users = [\n    User(name='Alice', age=25, active=True, role=Role.ADMIN, address={'street': '123 Main St', 'city': 'Anytown', 'country': 'USA'}, activities=[Activity('Run'), Activity('Swim')]),\n    User(name='Bob', age=30, active=False, role=Role.USER, address={'street': '456 Elm St', 'city': 'Othertown', 'country': 'Canada'}, activities=[Activity('Hike')])\n]\n\nreport = generate_user_activity_report(users)\n",
               "description": ""
             },
             "name": "generate_user_activity_report",
@@ -444,12 +444,12 @@
     "path": "service.java",
     "content": {
       "structured": {
-        "description": "Classes and enums representing users, their activities, and addresses. It uses Java Stream API and lambda expressions to generate a user activity report based on certain conditions. The report includes details about each user, such as name, age, status, role, and address, along with the activities they performed.",
+        "description": "Classes and enums representing user data, user activities, and an address. It also includes a predicate-based filtering mechanism for user activity reports. The main function generates a report that filters out users based on age and activity type, formats their name, age, status, role, and address, and then lists their activities in a specific format.",
         "items": [
           {
-            "id": "8f9096e5-e317-a892-0444-d7e5ba3d7e47",
+            "id": "3d87172d-0e1c-77b7-c443-c41487d90c02",
             "ancestors": [],
-            "description": "Represents an activity performed by a user in a system. It encapsulates the details of a specific action taken by a user, including the user's name, the action itself, and the date it was performed. The class provides a way to format this information into a human-readable string.",
+            "description": "Represents user activities, comprising username, action taken, and date of occurrence. It provides utility for formatting these activities into human-readable strings. This class plays a crucial role in the UserActivityReport, facilitating the generation of reports on user activities.",
             "name": "UserActivity",
             "location": {
               "start": 12,
@@ -463,20 +463,20 @@
             "docLength": null
           },
           {
-            "id": "be8ee171-82bc-d79d-7f4f-712741dc9b2e",
+            "id": "3b324675-fa31-649b-c143-64dfe003e685",
             "ancestors": [
-              "8f9096e5-e317-a892-0444-d7e5ba3d7e47"
+              "3d87172d-0e1c-77b7-c443-c41487d90c02"
             ],
-            "description": "Retrieves the value of a variable named `username` and returns it as a string. This suggests that the variable `username` stores the username of an entity, likely for identification or authentication purposes. The returned string can be used to access or display the username accordingly.",
+            "description": "Returns a string representing the current user's username. The function does not accept any parameters and simply retrieves the value stored in the `username` variable, returning it as a string result.",
             "params": [],
             "returns": {
               "type_name": "String",
-              "description": "a string representing the username.",
+              "description": "a string representing the current user's username.",
               "complex_type": false
             },
             "usage": {
               "language": "java",
-              "code": "UserActivity userActivity = new UserActivity(\"John\", \"login\", new Date());\nString username = userActivity.getUsername();\nSystem.out.println(username); // Output: John",
+              "code": "UserActivity user = new UserActivity(\"Alice\", \"login\", new Date());\nString username = user.getUsername();\n",
               "description": ""
             },
             "name": "getUsername",
@@ -492,20 +492,20 @@
             "docLength": null
           },
           {
-            "id": "3e7146cc-cbfd-75bf-1b49-7e738a74a13d",
+            "id": "8d08af3a-d138-94aa-cf45-4020a43150fd",
             "ancestors": [
-              "8f9096e5-e317-a892-0444-d7e5ba3d7e47"
+              "3d87172d-0e1c-77b7-c443-c41487d90c02"
             ],
-            "description": "Retrieves and returns a string value representing an action. The returned value is stored in the `action` variable, which may have been previously set by another part of the program. This allows other parts of the code to access and utilize the current action value.",
+            "description": "Retrieves and returns a string value representing an action. It does not modify any data and simply accesses a previously stored value, indicating a read-only operation. The returned value is assigned to the `action` variable.",
             "params": [],
             "returns": {
               "type_name": "String",
-              "description": "a string value stored in the `action` variable.",
+              "description": "a string representing the value of the `action` variable.",
               "complex_type": false
             },
             "usage": {
               "language": "java",
-              "code": "UserActivity ua = new UserActivity(\"Alice\", \"login\", new Date());\nString action = ua.getAction(); \nSystem.out.println(action); // Output: login",
+              "code": "UserActivity userActivity = new UserActivity(\"Alice\", \"login\", new Date());\nString action = userActivity.getAction();\n",
               "description": ""
             },
             "name": "getAction",
@@ -521,20 +521,20 @@
             "docLength": null
           },
           {
-            "id": "fd660805-f903-4ab0-7042-342b8d38ded5",
+            "id": "8df95cab-874c-9fb9-bb47-6e5dbb127ae1",
             "ancestors": [
-              "8f9096e5-e317-a892-0444-d7e5ba3d7e47"
+              "3d87172d-0e1c-77b7-c443-c41487d90c02"
             ],
-            "description": "Retrieves a `Date` object and returns it. The returned object represents a specific point in time, encapsulating the year, month, day, hour, minute, second, and millisecond.",
+            "description": "Retrieves and returns a `Date` object. The returned object represents a point in time, capturing both date and time information. This method provides access to the stored date value for use elsewhere in the program.",
             "params": [],
             "returns": {
               "type_name": "Date",
-              "description": "a `Date` object containing the current system date and time.",
+              "description": "a `Date` object representing a specific date and time.",
               "complex_type": false
             },
             "usage": {
               "language": "java",
-              "code": "Date date = new UserActivity(\"Alice\", \"login\", new Date(1672531200000L)).getDate();",
+              "code": "Date date = new UserActivity(\"Alice\", \"login\", new Date()).getDate();",
               "description": ""
             },
             "name": "getDate",
@@ -550,20 +550,20 @@
             "docLength": null
           },
           {
-            "id": "b921bb35-c029-eab6-e041-5a419e4955ca",
+            "id": "49fb889e-4fc3-f9ba-8643-fdff60c9a2c0",
             "ancestors": [
-              "8f9096e5-e317-a892-0444-d7e5ba3d7e47"
+              "3d87172d-0e1c-77b7-c443-c41487d90c02"
             ],
-            "description": "Concatenates a string representation of date, an action, and a username to produce a formatted string. It uses a SimpleDateFormat object to format the date in the specified format \"yyyy-MM-dd\". The resulting string describes an event performed by a user on a specific date.",
+            "description": "Concatenates user information with a date string, using a specified format for the date. It returns a formatted string containing the username, action performed, and date. The function utilizes the `SimpleDateFormat` class to achieve the desired formatting of the date.",
             "params": [],
             "returns": {
               "type_name": "String",
-              "description": "a formatted string containing the username, action, and date.",
+              "description": "a string describing an event, including date.",
               "complex_type": false
             },
             "usage": {
               "language": "java",
-              "code": "UserActivity activity = new UserActivity(\"John\", \"login\", new Date());\nSystem.out.println(activity.format());",
+              "code": "UserActivity activity = new UserActivity(\"Alice\", \"login\", new Date(1672531200000L));\nSystem.out.println(activity.format());",
               "description": ""
             },
             "name": "format",
@@ -579,9 +579,9 @@
             "docLength": null
           },
           {
-            "id": "193a9ebd-5ffa-3c84-4f40-d1a6166cd2bb",
+            "id": "f51efb5f-bc1f-83aa-0544-3ea9b1122a99",
             "ancestors": [],
-            "description": "Represents an individual with details such as name, age, activity status, role, address, and a list of activities. It provides getters for these properties and has a nested Address class to represent the user's location.",
+            "description": "Represents a user entity with attributes such as name, age, active status, role, address, and activities. It provides methods to retrieve these attributes and has an inner Address class for storing the user's address details.",
             "name": "User",
             "location": {
               "start": 41,
@@ -595,20 +595,20 @@
             "docLength": null
           },
           {
-            "id": "342f4eda-fa3c-d5a5-b24e-9ea1afb5a8dd",
+            "id": "ad8a907a-fa5a-3b8a-b845-492aa936da42",
             "ancestors": [
-              "193a9ebd-5ffa-3c84-4f40-d1a6166cd2bb"
+              "f51efb5f-bc1f-83aa-0544-3ea9b1122a99"
             ],
-            "description": "Retrieves and returns a string value representing the name. The returned value is stored in a variable named `name`. This function provides an interface to access the name attribute.",
+            "description": "Returns a string value representing the object's name property. This method is likely part of a class that encapsulates an entity with a unique identifier, such as a person or a product, and provides read-only access to its name attribute.",
             "params": [],
             "returns": {
               "type_name": "String",
-              "description": "a string representation of an instance variable named \"name\".",
+              "description": "a string representing the current value of the `name` variable.",
               "complex_type": false
             },
             "usage": {
               "language": "java",
-              "code": "User user = new User(\"John\", 25, true, UserRole.ADMIN,\n        new User.Address(\"123 Main St\", \"Metropolis\", \"USA\"), new ArrayList<>());\nString name = user.getName();\n",
+              "code": "User user = new User(\"John\", 25, true, UserRole.ADMIN, new User.Address(\"123 Main St\", \"Metropolis\", \"USA\"), new ArrayList<>());\nSystem.out.println(user.getName());",
               "description": ""
             },
             "name": "getName",
@@ -624,20 +624,20 @@
             "docLength": null
           },
           {
-            "id": "9f7557ba-148a-1483-ac40-70629401ae79",
+            "id": "e4fe6560-892b-79a5-9748-ef0033713580",
             "ancestors": [
-              "193a9ebd-5ffa-3c84-4f40-d1a6166cd2bb"
+              "f51efb5f-bc1f-83aa-0544-3ea9b1122a99"
             ],
-            "description": "Retrieves and returns an integer value representing a person's age. The age is stored as a variable within the class, which allows for its retrieval through this method. This function does not modify the age but rather provides access to it.",
+            "description": "Returns an integer value representing the age. The function does not take any parameters and simply retrieves the stored age value, which is presumably set elsewhere in the class or object. This method provides a way to access the age information.",
             "params": [],
             "returns": {
               "type_name": "integer",
-              "description": "an integer representing the current age.",
+              "description": "an integer value representing the object's age.",
               "complex_type": false
             },
             "usage": {
               "language": "java",
-              "code": "User user = new User(\"John\", 25, true, UserRole.ADMIN, new User.Address(\"123 Main St\", \"Metropolis\", \"USA\"), new ArrayList<>());\nint age = user.getAge();\nSystem.out.println(age);",
+              "code": "User user = new User(\"John\", 25, true, UserRole.ADMIN, new Address(\"123 Main St\", \"Metropolis\", \"USA\"), new ArrayList<>());\nSystem.out.println(user.getAge());",
               "description": ""
             },
             "name": "getAge",
@@ -653,20 +653,20 @@
             "docLength": null
           },
           {
-            "id": "6854ade5-f2da-edb1-d74d-565d218c81ab",
+            "id": "042a6b27-ae9c-bca6-6b4d-5944ff6ca456",
             "ancestors": [
-              "193a9ebd-5ffa-3c84-4f40-d1a6166cd2bb"
+              "f51efb5f-bc1f-83aa-0544-3ea9b1122a99"
             ],
-            "description": "Returns a boolean value indicating the state of an object or variable called \"active\". The exact purpose and scope of \"active\" are not specified, but it is likely a flag or indicator used elsewhere in the program to control execution flow.",
+            "description": "Returns a boolean value indicating whether an object is currently active or not. It simply retrieves and returns the value of the `active` variable. This allows external code to query the state of the object's activity.",
             "params": [],
             "returns": {
               "type_name": "boolean",
-              "description": "a boolean value indicating whether the object's \"active\" state is true or false.",
+              "description": "a boolean value representing the current state of the `active` variable.",
               "complex_type": false
             },
             "usage": {
               "language": "java",
-              "code": "User user = new User(\"Alice\", 25, true, UserRole.ADMIN, \n                     new User.Address(\"123 Main St\", \"Metropolis\", \"USA\"), \n                     new ArrayList<>());\nSystem.out.println(user.isActive());",
+              "code": "User user = new User(\"John\", 25, true, UserRole.USER, new User.Address(\"123 Main St\", \"Metropolis\", \"USA\"), new ArrayList<>());\nSystem.out.println(user.isActive());",
               "description": ""
             },
             "name": "isActive",
@@ -682,20 +682,20 @@
             "docLength": null
           },
           {
-            "id": "25427a19-69aa-67b9-e842-21bb4e8b982a",
+            "id": "9a278f8d-afc6-76b2-de4f-e7edaac980ee",
             "ancestors": [
-              "193a9ebd-5ffa-3c84-4f40-d1a6166cd2bb"
+              "f51efb5f-bc1f-83aa-0544-3ea9b1122a99"
             ],
-            "description": "Returns an instance of the `UserRole` class, representing a user's role. This method retrieves and provides access to the existing user role without modifying it. The returned object is read-only, reflecting the current state of the user's role.",
+            "description": "Returns a `UserRole` object representing the current user's role. It simply retrieves and provides access to the pre-set `role` variable without performing any computations or operations on it. The returned `UserRole` object can be used by other parts of the program.",
             "params": [],
             "returns": {
               "type_name": "UserRole",
-              "description": "an instance of `UserRole`.",
+              "description": "an instance of `UserRole` class.",
               "complex_type": false
             },
             "usage": {
               "language": "java",
-              "code": "User user = new User(\"Alice\", 25, true, UserRole.ADMIN, \n                    new Address(\"123 Main St\", \"Metropolis\", \"USA\"), \n                    new ArrayList<>());\nUserRole role = user.getRole();\nSystem.out.println(role);",
+              "code": "UserRole adminRole = users.get(0).getRole();",
               "description": ""
             },
             "name": "getRole",
@@ -711,20 +711,20 @@
             "docLength": null
           },
           {
-            "id": "563bf15d-7f83-9f9d-9e47-768f22e85f98",
+            "id": "cb7a0c92-5a1a-5891-6342-76f35f34c0f1",
             "ancestors": [
-              "193a9ebd-5ffa-3c84-4f40-d1a6166cd2bb"
+              "f51efb5f-bc1f-83aa-0544-3ea9b1122a99"
             ],
-            "description": "Retrieves and returns an object of type `Address`. The returned object is assigned to a variable named `address`, which is presumably declared elsewhere in the code. This function provides read-only access to the stored address information.",
+            "description": "Returns an instance of the `Address` class. This method simply retrieves and provides access to the existing `address` object, allowing other parts of the program to utilize its contents. The returned value is a reference to the internal `address` state.",
             "params": [],
             "returns": {
               "type_name": "Address",
-              "description": "an object of type `Address`.",
+              "description": "an instance of `Address` class.",
               "complex_type": false
             },
             "usage": {
               "language": "java",
-              "code": "User user = new User(\"Alice\", 25, true, UserRole.ADMIN,\n        new User.Address(\"123 Main St\", \"Metropolis\", \"USA\"), aliceActivities);\nAddress address = user.getAddress();\n",
+              "code": "User user = new User(\"Alice\", 25, true, UserRole.ADMIN, \n                    new User.Address(\"123 Main St\", \"Metropolis\", \"USA\"), new ArrayList<>());\nAddress address = user.getAddress();\nSystem.out.println(address.getStreet());",
               "description": ""
             },
             "name": "getAddress",
@@ -740,20 +740,20 @@
             "docLength": null
           },
           {
-            "id": "bb18c66a-52cd-178d-df41-729190878449",
+            "id": "d9b9b1a5-c56b-f3a8-0149-45d5ee3e47e8",
             "ancestors": [
-              "193a9ebd-5ffa-3c84-4f40-d1a6166cd2bb"
+              "f51efb5f-bc1f-83aa-0544-3ea9b1122a99"
             ],
-            "description": "Retrieves a list of user activities and returns it. The returned list is not modified by the function, as it simply provides access to an existing collection of activities. This read-only approach allows for querying or rendering the activities without altering their state.",
+            "description": "Retrieves a list of user activities and returns it. The list is stored as an instance variable named `activities`. This function does not perform any operation on the data, but simply provides access to the pre-existing collection of activities.",
             "params": [],
             "returns": {
               "type_name": "List",
-              "description": "a list of `UserActivity` objects.",
+              "description": "a list of user activities.",
               "complex_type": false
             },
             "usage": {
               "language": "java",
-              "code": "List<UserActivity> activities = users.get(0).getActivities();\n",
+              "code": "User user = new User(\"John\", 25, true, UserRole.ADMIN,\n        new Address(\"123 Main St\", \"Metropolis\", \"USA\"), new ArrayList<>());\n\nList<UserActivity> activities = user.getActivities();\nactivities.add(new UserActivity(\"John\", \"login\", new Date(1672531200000L)));\nactivities.add(new UserActivity(\"John\", \"purchase\", new Date(1676419200000L)));\n\n// Do something with the list of activities",
               "description": ""
             },
             "name": "getActivities",
@@ -769,11 +769,11 @@
             "docLength": null
           },
           {
-            "id": "496d344b-2969-97b7-0645-c155471ea384",
+            "id": "80abd3cb-c809-de89-f54c-a6dfe571560b",
             "ancestors": [
-              "193a9ebd-5ffa-3c84-4f40-d1a6166cd2bb"
+              "f51efb5f-bc1f-83aa-0544-3ea9b1122a99"
             ],
-            "description": "Represents an address with properties for street, city, and country. It provides a way to construct an address from these components and offers a string representation of the address. The class is designed to encapsulate an address value object.",
+            "description": "Represents an address with three properties: street, city, and country. It provides a constructor to initialize these properties and getter methods to retrieve them. The class also overrides the toString method to provide a string representation of the address.",
             "name": "Address",
             "location": {
               "start": 82,
@@ -787,21 +787,21 @@
             "docLength": null
           },
           {
-            "id": "90f220fc-3d24-329d-4c43-f582152424d2",
+            "id": "0ffbdd9c-a212-b38d-644e-1f6fd23e3923",
             "ancestors": [
-              "193a9ebd-5ffa-3c84-4f40-d1a6166cd2bb",
-              "496d344b-2969-97b7-0645-c155471ea384"
+              "f51efb5f-bc1f-83aa-0544-3ea9b1122a99",
+              "80abd3cb-c809-de89-f54c-a6dfe571560b"
             ],
-            "description": "Retrieves and returns a string value representing the street address. This method is likely part of a larger class for encapsulating or manipulating geographic information, such as an address book entry. The returned value is presumably stored in an instance variable named `street`.",
+            "description": "Retrieves the value of a variable named `street`, returning it as a string. This suggests that the object or class containing this method has an attribute for storing and retrieving street information. The returned value is accessible to whoever calls this method.",
             "params": [],
             "returns": {
               "type_name": "String",
-              "description": "a string representing the value of the `street` variable.",
+              "description": "a string value representing the street address.",
               "complex_type": false
             },
             "usage": {
               "language": "java",
-              "code": "User.Address address = new User.Address(\"123 Main St\", \"Metropolis\", \"USA\");\nString street = address.getStreet();",
+              "code": "Address address = new Address(\"123 Main St\", \"Metropolis\", \"USA\");\nString street = address.getStreet();\nSystem.out.println(street); // prints: 123 Main St",
               "description": ""
             },
             "name": "getStreet",
@@ -817,21 +817,21 @@
             "docLength": null
           },
           {
-            "id": "f56cb52d-5709-b687-6a49-b733ec19722b",
+            "id": "d8c9768a-ef66-f298-6d43-77e2adbf38b5",
             "ancestors": [
-              "193a9ebd-5ffa-3c84-4f40-d1a6166cd2bb",
-              "496d344b-2969-97b7-0645-c155471ea384"
+              "f51efb5f-bc1f-83aa-0544-3ea9b1122a99",
+              "80abd3cb-c809-de89-f54c-a6dfe571560b"
             ],
-            "description": "Retrieves and returns a string value representing a city. This method appears to provide read-only access to the stored city information, allowing users to retrieve the current city value without modifying it. The returned value is a copy of the internal `city` variable.",
+            "description": "Retrieves and returns a string value representing the current city. This method appears to be a getter, providing read-only access to the `city` variable. It does not modify or manipulate the value in any way, simply returning it as is.",
             "params": [],
             "returns": {
               "type_name": "String",
-              "description": "a string value representing the city.",
+              "description": "a string representing the value of the `city` variable.",
               "complex_type": false
             },
             "usage": {
               "language": "java",
-              "code": "Address address = new User.Address(\"123 Main St\", \"Metropolis\", \"USA\");\nString city = address.getCity();\n",
+              "code": "Address address = new Address(\"123 Main St\", \"Metropolis\", \"USA\");\nString city = address.getCity();\n",
               "description": ""
             },
             "name": "getCity",
@@ -847,21 +847,21 @@
             "docLength": null
           },
           {
-            "id": "f5aff567-cbd7-ffb2-0948-0bf5413646ee",
+            "id": "982da78a-a916-8386-734c-f29bf311e9ce",
             "ancestors": [
-              "193a9ebd-5ffa-3c84-4f40-d1a6166cd2bb",
-              "496d344b-2969-97b7-0645-c155471ea384"
+              "f51efb5f-bc1f-83aa-0544-3ea9b1122a99",
+              "80abd3cb-c809-de89-f54c-a6dfe571560b"
             ],
-            "description": "Retrieves and returns a string value representing a country. This function provides read-only access to the internal state of an object, allowing users to obtain the current country without modifying it. The returned value is a simple string representation of the country.",
+            "description": "Retrieves and returns the value of a variable named `country`, which is likely an attribute or property of the object it belongs to, providing access to its current value.",
             "params": [],
             "returns": {
               "type_name": "String",
-              "description": "a string representing the country's name or value.",
+              "description": "a string representing the country's name.",
               "complex_type": false
             },
             "usage": {
               "language": "java",
-              "code": "Address address = new Address(\"123 Main St\", \"New York\", \"USA\");\nString country = address.getCountry();",
+              "code": "Address address = new Address(\"123 Main St\", \"Metropolis\", \"USA\");\nString country = address.getCountry();\n",
               "description": ""
             },
             "name": "getCountry",
@@ -877,12 +877,12 @@
             "docLength": null
           },
           {
-            "id": "9f1ce9e4-9bc5-a78c-004b-1dc478d21ae5",
+            "id": "633235d2-1e04-ac8c-ed46-b29dd5c04044",
             "ancestors": [
-              "193a9ebd-5ffa-3c84-4f40-d1a6166cd2bb",
-              "496d344b-2969-97b7-0645-c155471ea384"
+              "f51efb5f-bc1f-83aa-0544-3ea9b1122a99",
+              "80abd3cb-c809-de89-f54c-a6dfe571560b"
             ],
-            "description": "Concatenates three string variables: `street`, `city`, and `country`, separated by commas, to form a single string representation of an object's address. This method overrides the default `toString` behavior, providing a custom string output for objects of this class.",
+            "description": "Concatenates three strings: `street`, `city`, and `country`, separated by commas, to form a single string representation of an object. This method overrides the default `toString` implementation provided by Java's Object class. The resulting string is returned as the output.",
             "params": [],
             "returns": {
               "type_name": "String",
@@ -891,7 +891,7 @@
             },
             "usage": {
               "language": "java",
-              "code": "Address address = new Address(\"123 Main St\", \"Metropolis\", \"USA\");\nSystem.out.println(address.toString());",
+              "code": "Address address = new Address(\"123 Main St\", \"Metropolis\", \"USA\");\nSystem.out.println(address.toString()); // Output: 123 Main St, Metropolis, USA",
               "description": ""
             },
             "name": "toString",
@@ -907,9 +907,9 @@
             "docLength": null
           },
           {
-            "id": "75ce2fc2-ca31-1d8e-484a-82cb038bb506",
+            "id": "0143f74f-d252-7580-5840-3a0904575ef8",
             "ancestors": [],
-            "description": "Generates a user activity report based on provided input parameters, filtering users by age and including inactive users if required, then formatting each user's activities in a readable format. The generated report includes essential information about the user and their activities.",
+            "description": "Generates a formatted report of user activities based on a list of users, minimum age, and activity filter. It collects user data and formats it into a string representation of the user's name, age, status, role, address, and a list of their activities.",
             "name": "UserActivityReport",
             "location": {
               "start": 112,
@@ -923,40 +923,40 @@
             "docLength": null
           },
           {
-            "id": "cab5c418-ece7-9b90-064d-66aec00ef780",
+            "id": "44686d28-095e-8f92-cc46-ca3b11a8961c",
             "ancestors": [
-              "75ce2fc2-ca31-1d8e-484a-82cb038bb506"
+              "0143f74f-d252-7580-5840-3a0904575ef8"
             ],
-            "description": "Generates a report on user activity by filtering users based on age and activity status, then collecting their activities that match a specified filter. The report includes formatted activities for each user.",
+            "description": "Generates a list of user activity reports based on input parameters: a list of users, minimum age, inclusion of inactive users, and an activity filter predicate. It filters and formats activities for each user meeting the conditions, then collects the results into a list.",
             "params": [
               {
                 "name": "users",
                 "type_name": "List<User>",
-                "description": "list of user objects to be processed and filtered according to specific criteria.\n\nStreamed for filtering and mapping operations. Contains a collection of user objects. Each user object has an age property and an isActive property.",
+                "description": "collection of users whose activity reports are to be generated based on certain criteria.\n\nStream of User objects containing age and activity information for each user.",
                 "complex_type": true
               },
               {
                 "name": "minAge",
                 "type_name": "int",
-                "description": "minimum age of users to include in the report, and it filters out users with an age less than this value.",
+                "description": "minimum age requirement for users to be included in the generated report.",
                 "complex_type": false
               },
               {
                 "name": "includeInactive",
                 "type_name": "boolean",
-                "description": "boolean flag that determines whether to include inactive users or only active users in the report generation process.",
+                "description": "option to include inactive users in the report, allowing for filtering based on user activity status.",
                 "complex_type": false
               },
               {
                 "name": "activityFilter",
                 "type_name": "Predicate<UserActivity>",
-                "description": "predicate used to filter user activities, allowing only those activities that satisfy the specified condition to be included in the report.\n\nFiltered by predicate, accepting user activities that match specific conditions. The exact condition is unknown due to deconstruction.",
+                "description": "predicate used to filter out user activities that do not match its condition when collecting and formatting user activity reports.\n\n",
                 "complex_type": true
               }
             ],
             "returns": {
               "type_name": "ListString",
-              "description": "a list of user activity reports.\n\nThe output is a list of strings. Each string represents a user's report activity. The list contains only users whose age is greater than or equal to the minimum age and either include inactive users or have active status.",
+              "description": "a list of user reports.\n\nThe output is a list of strings representing user activity reports. Each string in the list corresponds to an individual user's report and contains information about their activities that match the provided filter criteria.",
               "complex_type": true
             },
             "name": "generateUserActivityReport",
@@ -972,29 +972,29 @@
             "docLength": null
           },
           {
-            "id": "db7c60fa-a807-2980-0740-d5c894c799c8",
+            "id": "d49a6917-cf0b-4c96-1740-c81fc8fe59db",
             "ancestors": [
-              "75ce2fc2-ca31-1d8e-484a-82cb038bb506"
+              "0143f74f-d252-7580-5840-3a0904575ef8"
             ],
-            "description": "Concatenates user information and a list of activities into a formatted string. The string includes the user's name, age, status, role, address, and a list of activities separated by dashes.",
+            "description": "Constructs a string representation of a user's report by appending their name, age, status, role, and address to a StringBuilder. It then iterates over a list of activities and appends each one to the report with indentation. The result is returned as a string.",
             "params": [
               {
                 "name": "user",
                 "type_name": "User",
-                "description": "information to be formatted and appended to a string, including name, age, status, role, address, and activities.\n\nExtracts and includes user's name, age, status, role, and address in the output report.",
+                "description": "user whose report is being formatted, providing information such as name, age, status, role, and address to be included in the report.\n\nDeconstructs `user`: Yes\nProperties: \n- Name \n- Age \n- Status (Active or Inactive)\n- Role \n- Address",
                 "complex_type": true
               },
               {
                 "name": "activities",
                 "type_name": "List<String>",
-                "description": "list of strings that are appended to the report as \"Activities\" with each activity preceded by a hyphen and separated by new lines.\n\nIterates over a list of strings; each string represents an activity.",
+                "description": "collection of strings that are appended to the report after the user's information, with each activity preceded by \" - \".\n\nIterates over each activity, and appends its string representation to the StringBuilder. The activities are separated by lines with leading hyphens.",
                 "complex_type": true
               }
             ],
             "returns": {
-              "type_name": "String",
-              "description": "a formatted string containing user information and their activities.",
-              "complex_type": false
+              "type_name": "string",
+              "description": "a formatted string describing a user's details and their activities.\n\nThe returned string is formatted as a report for a user, consisting of several lines. Each line represents a specific attribute of the user such as name, age, status, role, address and activities. The activities are listed with dashes in front of each activity description.",
+              "complex_type": true
             },
             "name": "formatUserReport",
             "location": {
@@ -1009,16 +1009,16 @@
             "docLength": null
           },
           {
-            "id": "d064bf67-f5b7-3087-b84c-db237003cd51",
+            "id": "ff66cb2b-8f8e-368a-8741-c9cff81a6a17",
             "ancestors": [
-              "75ce2fc2-ca31-1d8e-484a-82cb038bb506"
+              "0143f74f-d252-7580-5840-3a0904575ef8"
             ],
-            "description": "Generates a user activity report by filtering activities of users above a specified age (18) and excluding logout actions, then prints the filtered activities as strings.",
+            "description": "Aggregates user activities and generates a report for users who are at least 18 years old, have logged in, and performed an activity other than logout. The report includes information about each user's name, age, and activity history.",
             "params": [
               {
                 "name": "args",
                 "type_name": "String[]",
-                "description": "command-line arguments passed to the program when it is executed.\n\nIt is an array of type `String`, containing multiple strings representing command-line arguments passed to the program.",
+                "description": "command-line arguments passed to the Java program when it is executed.\n\nThe type of `args` is an array of `String`, and its length is not specified. Each element in the array represents a command-line argument passed to the program.",
                 "complex_type": true
               }
             ],

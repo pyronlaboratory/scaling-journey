@@ -41,15 +41,15 @@ const defaultOptions = {
 };
 
 /**
- * @description Converts a user activity object into a string representation. It takes
- * an array-like object with three properties: username, action, and date. The function
- * returns a formatted string combining these properties, displaying the username,
- * action, and date of the activity in a human-readable format.
+ * @description Takes a user activity object as input and returns a formatted string
+ * representing the activity. The activity is composed of a username, action, and
+ * date. The function concatenates these components into a human-readable string with
+ * the date converted to a localized string representation.
  *
- * @param {UserActivity} activity - Used to format user activity information.
+ * @param {UserActivity} activity - Processed into a formatted string.
  *
- * @returns {string} A formatted message indicating the username, action and date of
- * an activity.
+ * @returns {string} A formatted activity log message. The returned string combines
+ * username, action, and date in the specified format.
  */
 const formatActivity = (activity: UserActivity): string => {
   const [username, action, date] = activity;
@@ -57,28 +57,27 @@ const formatActivity = (activity: UserActivity): string => {
 };
 
 /**
- * @description Filters users based on their age and activity status, then maps them
- * to a report format displaying user information and their activities. The report
- * is rendered as an unordered list with each user's details and activities listed individually.
+ * @description Filters and maps a list of users based on age and activity criteria,
+ * then renders a report displaying user information, including their name, role,
+ * age, address, status, and activities.
  *
- * @param {object} obj - 2 level nested. It contains two properties: 'users' and
- * 'options'. The 'users' property expects an array, while the 'options' property is
- * an object with default values for 'includeInactive' and 'activityFilter'.
+ * @param {object} obj - Non-optional. It has two properties: `users`, which is an
+ * array, and `options`. The `users` property corresponds to a set of user objects,
+ * while `options` contains nested properties for filtering users and activities.
  *
- * @param {UserActivityReportProps['users']} obj.users - An array of user objects.
+ * @param {User[]} obj.users - Required for rendering user activity reports.
  *
  * @param {number} obj.minAge - Used to filter users by age.
  *
  * @param {{
  *     includeInactive = defaultOptions.includeInactive,
  *     activityFilter = defaultOptions.activityFilter,
- *   } = defaultOptions} obj.options - Optional, which means that if it's not passed
- * as an argument when calling this function, then it will have its default values.
+ *   } = defaultOptions} obj.options - Optional, it allows to customize report
+ * generation with filtering and excluding inactive users.
  *
- * @returns {JSX.Element} A React component that represents a user activity report.
- * The report consists of a list of user cards with their name, role, age, address
- * and activities. Each user card includes details about the user's status and the
- * activities they are involved in.
+ * @returns {JSX.Element} A React component representing a report containing information
+ * about multiple users, including their activities. The component consists of a list
+ * of user cards with details and a list of activities for each user.
  */
 const UserActivityReport: React.FC<Props> = ({
   users,
@@ -155,10 +154,10 @@ const users: User[] = [
 ];
 
 /**
- * @description Renders a user interface with an `<h1>` element displaying "User
- * Activity Report". It also renders a `UserActivityReport` component, passing in
- * `users`, `minAge=18`, and an object containing options: `includeInactive=true` and
- * a filter function that excludes 'logout' actions.
+ * @description Renders a user interface with a heading "User Activity Report" and
+ * passes `users`, `minAge`, and options to a `UserActivityReport` component for
+ * rendering. The options include an activity filter that excludes 'logout' actions
+ * when calculating the report.
  */
 const App: React.FC = () => (
   <div>

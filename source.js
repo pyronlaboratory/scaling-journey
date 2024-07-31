@@ -1,34 +1,34 @@
 /**
- * @description Generates a report for users based on specified criteria. It filters
- * users by age and activity status, and formats their registration dates according
- * to a user-defined date format. The resulting report includes user name, age,
- * activity status, and formatted registration date.
+ * @description Generates a report for users based on their age and activity status.
+ * It filters users who are at least a certain minimum age (defaulting to 18) and
+ * either active or not inactive, as specified by the options. The report includes
+ * user name, age, activity status, and registration date.
  *
- * @param {user[]} users - An array of user objects.
+ * @param {object} users - An array of user data.
  *
  * @param {number} minAge - Used to filter users based on their age.
  *
- * @param {object} options - Optional, which can be used to customize the report
- * generation process.
+ * @param {object} options - Used to specify additional settings.
  *
- * @returns {object} An array of objects with properties name, age, active, and
- * registrationDate. Each object represents a user meeting certain criteria.
+ * @returns {object[]} An array of objects containing user information such as name,
+ * age, activity status, and registration date in a specified format.
  */
 function generateUserReport(users, minAge = 18, options = {}) {
   const { includeInactive = false, dateFormat = 'YYYY-MM-DD' } = options;
   
   /**
-   * @description Converts a date into a specified string format. It takes a date and
-   * a format as inputs, extracts the day, month, and year from the date, formats them
-   * according to the input format, and returns the formatted string.
+   * @description Takes a date and a format string as input, and returns a formatted
+   * date string based on the provided format. It extracts the year, month, and day
+   * from the input date and pads single-digit values with zeros before replacing
+   * placeholders in the format string.
    *
-   * @param {string} date - Expected to represent a date.
+   * @param {number} date - Unix timestamp.
    *
-   * @param {string} format - Used to define the desired output format.
+   * @param {string} format - Used for formatting output.
    *
-   * @returns {string} A formatted date in accordance with the specified format. The
-   * returned string replaces placeholders 'YYYY', 'MM', and 'DD' with corresponding
-   * year, month, and day values, respectively.
+   * @returns {string} Formatted date according to the specified format, replacing
+   * placeholders 'YYYY', 'MM', and 'DD' with year, month, and day respectively, if
+   * necessary adding leading zero for single-digit values.
    */
   function formatDate(date, format) {
     const d = new Date(date);

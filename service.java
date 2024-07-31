@@ -10,10 +10,9 @@ enum UserRole {
 }
 
 /**
- * Represents an activity performed by a user, including the username, action taken,
- * and date of the activity. It provides a format method to convert the activity
- * details into a string representation. The class is used to track and report on
- * user activities.
+ * Represents a user's activity with date and time information. It provides getter
+ * methods for retrieving the username, action performed, and date of the activity,
+ * as well as a format method for generating a human-readable string representation.
  */
 class UserActivity {
     private String username;
@@ -27,44 +26,45 @@ class UserActivity {
     }
 
     /**
-     * Retrieves and returns a stored value representing a user's username. The returned
-     * value is of type `String`. This function provides read-only access to the stored
-     * username.
+     * Retrieves and returns a stored username as a string. This method provides access
+     * to the existing username value, allowing it to be utilized or displayed elsewhere
+     * in the program. The returned value is a snapshot of the current username.
      *
-     * @returns a string representing a user's name.
+     * @returns a string value representing the current username.
      */
     public String getUsername() {
         return username;
     }
 
     /**
-     * Retrieves and returns a string value representing an action. This method simply
-     * accesses a private variable `action` and returns its current state without modifying
-     * it. The returned string provides information about a specific action.
+     * Returns a string value representing an unknown entity's "action". It retrieves and
+     * passes back the stored `action` state. This functionality serves to provide access
+     * to the current state of the action attribute.
      *
-     * @returns a string value stored in the `action` variable.
+     * @returns a string value representing an unknown entity's action.
      */
     public String getAction() {
         return action;
     }
 
     /**
-     * Retrieves a `Date` object and returns it. The returned `Date` object represents a
-     * point in time, which can be used for various purposes such as storing or processing
-     * dates in a program.
+     * Retrieves a date object and returns it. This method does not accept any parameters
+     * and simply provides access to an existing date instance stored as `date`. The
+     * returned date is presumably used elsewhere in the application or code.
      *
-     * @returns a `Date` object representing a point in time.
+     * @returns a `Date`.
      */
     public Date getDate() {
         return date;
     }
 
     /**
-     * Concatenates strings to form a message describing an action performed by a user.
-     * The message includes the username, action, and date in the format "yyyy-MM-dd".
-     * The function returns this formatted string.
+     * Combines user's username, a description of an action, and a date to create a
+     * formatted string. The date is formatted according to the `yyyy-MM-dd` pattern using
+     * the `SimpleDateFormat`. The resulting string represents a log entry with the given
+     * details.
      *
-     * @returns a string combining username, action, and date in a specific format.
+     * @returns a string describing an action, including date and username.
      */
     public String format() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -73,10 +73,9 @@ class UserActivity {
 }
 
 /**
- * Encapsulates user-related data and functionality. It represents an individual with
- * attributes such as name, age, active status, role, address, and activities. The
- * class allows for the creation of user objects and provides methods to access their
- * properties.
+ * Represents individual users with attributes such as name, age, activity status,
+ * role, address, and a list of activities performed by that user. It encapsulates
+ * these properties and provides getter methods to access them.
  */
 class User {
     private String name;
@@ -96,76 +95,79 @@ class User {
     }
 
     /**
-     * Returns the value of the `name` variable as a string. It retrieves and provides
-     * access to the stored name. This method simply wraps up the getter functionality
-     * for the `name` attribute.
+     * Retrieves a string value representing a name and returns it. This operation is
+     * performed without modifying the original data. The returned value is a copy of the
+     * internal state of the object.
      *
-     * @returns a string representation of an instance variable named "name".
+     * @returns a string representing the object's name.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Returns an integer value representing the age of an object. The returned value is
-     * stored in a variable named `age`. This function does not modify the age, it only
-     * retrieves and returns its current state.
+     * Returns an integer value representing the age of an entity or object. The age is
+     * stored in a variable named `age`. This read-only function allows external access
+     * to the internal state of the entity, providing its current age for further processing
+     * or display.
      *
-     * @returns an integer value representing the age of an object.
+     * @returns an integer representing the age of a person.
      */
     public int getAge() {
         return age;
     }
 
     /**
-     * Returns a boolean value indicating whether an object is active or not. It simply
-     * retrieves and returns the value of the `active` variable, without performing any
-     * calculations or modifying external state. The function does not take any parameters
-     * and always returns a boolean result.
+     * Returns a boolean indicating whether an object is currently active. This value is
+     * simply retrieved from the `active` field, implying that the activation status is
+     * stored elsewhere and not calculated within the function itself. The result determines
+     * whether the object's activity can be considered ongoing.
      *
-     * @returns a boolean value representing the current state of the "active" variable.
+     * @returns a boolean value indicating the current state of "active".
      */
     public boolean isActive() {
         return active;
     }
 
     /**
-     * Retrieves and returns an instance of `UserRole`. This indicates that it provides
-     * access to the current user's role, possibly for purposes such as authentication
-     * or authorization. The returned value is read-only, suggesting that it may be used
-     * for querying or display purposes only.
+     * Retrieves and returns a `UserRole` object representing the current role. This
+     * function is likely part of an authentication or authorization system, allowing for
+     * the retrieval of user roles. The returned role can be used to determine access
+     * levels or permissions within the application.
      *
-     * @returns a `UserRole` object representing the current user's role.
+     * @returns an instance of the `UserRole` class.
      */
     public UserRole getRole() {
         return role;
     }
 
     /**
-     * Retrieves an object of type `Address`. It returns the value stored in the `address`
-     * variable, providing access to the contained address information.
+     * Retrieves and returns the `address` object. This read-only operation provides
+     * access to the stored address information without modifying it. The obtained address
+     * data can then be used for further processing or display.
      *
-     * @returns an instance of class `Address`.
+     * @returns an instance of the `Address` class.
      */
     public Address getAddress() {
         return address;
     }
 
     /**
-     * Retrieves and returns a list of user activities. It appears to be a simple getter
-     * method that provides read-only access to an existing list of `UserActivity` objects,
-     * which are stored in the `activities` variable.
+     * Returns a list of user activities, allowing access to the stored data. This method
+     * provides read-only access to the stored activities, enabling retrieval without
+     * modification or creation of new activities. The returned list represents the
+     * collection of user activities.
      *
-     * @returns a list of `UserActivity` objects named `activities`.
+     * @returns a list of `UserActivity` objects.
      */
     public List<UserActivity> getActivities() {
         return activities;
     }
 
     /**
-     * Represents a geographic address with attributes for street, city, and country. It
-     * provides methods to get these values and overrides the toString method to return
-     * a string representation of the address in the format "street, city, country".
+     * Is used to represent an address with street, city, and country details. It provides
+     * methods for getting these details and overrides the toString() method to provide
+     * a human-readable representation of the address.
      */
     public static class Address {
         private String street;
@@ -179,46 +181,44 @@ class User {
         }
 
         /**
-         * Retrieves the value of a string variable `street`. The returned value is a
-         * representation of the address's street name or equivalent information. This method
-         * does not modify the original data, it simply provides access to the existing information.
+         * Returns a string value representing the street address. This method retrieves and
+         * provides access to the stored `street` variable. The returned value is simply a
+         * read-only copy of the internal state, allowing for inspection but not modification.
          *
-         * @returns a string representing the value of the `street` variable.
+         * @returns a string representing the street.
          */
         public String getStreet() {
             return street;
         }
 
         /**
-         * Retrieves the value of a `city` variable and returns it as a string. This method
-         * allows access to the stored city information, making it available for use by other
-         * parts of the program or presentation layer. The returned value is a simple string
-         * representation of the city name.
+         * Returns a string value representing the city. It retrieves and provides access to
+         * the previously stored or assigned city information. This simple getter method
+         * allows other parts of the program to retrieve the city data without modifying it.
          *
-         * @returns a string representing the value of the `city` variable.
+         * @returns a string representing the city.
          */
         public String getCity() {
             return city;
         }
 
         /**
-         * Returns a string value representing a country. It retrieves and returns an existing
-         * value stored in the variable `country`. This method allows access to the country
-         * information without modifying it.
+         * Retrieves and returns the value of the `country` variable. This allows external
+         * access to the stored country information, enabling its use or manipulation elsewhere
+         * in the program. The returned value is a string representing the country name.
          *
-         * @returns a string value representing the country.
+         * @returns a string value representing a country.
          */
         public String getCountry() {
             return country;
         }
 
         /**
-         * Returns a string representation of an object by concatenating the values of `street`,
-         * `city`, and `country`. The resulting string is formatted with commas separating
-         * each value, providing a human-readable output. This method overrides the default
-         * `toString` behavior in Java.
+         * Returns a string representation of an object, combining three strings: `street`,
+         * `city`, and `country`. This concatenated string is formatted with commas separating
+         * each part. The resulting string provides a human-readable summary of the address.
          *
-         * @returns a string containing street, city, and country separated by commas.
+         * @returns a string combining street, city, and country information.
          */
         @Override
         public String toString() {
@@ -228,39 +228,43 @@ class User {
 }
 
 /**
- * Generates and formats user activity reports from a list of users based on filters
- * and criteria. It uses Java Stream API to process data and generate a report string
- * for each user with their activities, status, role, and address. The main method
- * demonstrates how to use this class to generate a report.
+ * Is designed to generate activity reports for users based on their age and activity
+ * filters. It uses Java Stream API to process user data and returns a list of formatted
+ * report strings. The main method demonstrates the usage of this class with sample
+ * user data.
  */
 class UserActivityReport {
 
     /**
-     * Generates a list of reports for users who meet certain criteria: their age is
-     * greater than or equal to the specified minimum age and they are either active or
-     * inactive (if includeInactive is true). It includes their activities that match a
-     * given predicate.
+     * Generates a report containing user activity data for users meeting specific criteria:
+     * age greater than or equal to `minAge`, and optionally including inactive users if
+     * `includeInactive` is `true`. Activities are filtered using the provided `activityFilter`
+     * predicate.
      *
-     * @param users collection of users from which active user reports are generated based
-     * on specified conditions and filtering criteria.
+     * @param users collection of users from which to generate the activity report,
+     * filtering and processing their associated user activities based on specified criteria.
      *
-     * Stream of users. Each user has age and activity status. Users may have multiple activities.
+     * Streamed, filtered by age and activity status; contains user objects having an
+     * "age" attribute and "getActivities()" method that returns a list of activities.
      *
-     * @param minAge minimum age of users to be included in the report, and users with
-     * ages less than `minAge` are filtered out from the result.
+     * @param minAge minimum age required for a user to be included in the report, with
+     * only users whose age is greater than or equal to this value being considered.
      *
-     * @param includeInactive option to include users who are inactive, along with active
-     * ones, in the generated report when their age is greater than or equal to the
-     * specified minimum age.
+     * @param includeInactive condition for including inactive users in the report
+     * generation process.
      *
-     * @param activityFilter predicate used to filter out UserActivity instances from the
-     * list of activities for each user based on specific criteria.
+     * @param activityFilter predicate that filters user activities based on specific
+     * criteria before formatting and collecting them into a list.
      *
-     * Predicate<UserActivity> activityFilter;
-     * The main property of this predicate is that it filters the user activities based
-     * on some condition defined in its implementation.
+     * Predicate - filters UserActivity instances based on an unspecified condition. Its
+     * main property is its predicate logic that determines whether or not a specific
+     * activity meets the desired criteria.
      *
      * @returns a list of formatted user reports.
+     *
+     * A list of strings is returned, where each string represents an activity report for
+     * a user. The report includes information about the user and their active activities
+     * that meet the specified conditions.
      */
     public static List<String> generateUserActivityReport(
             List<User> users,
@@ -281,21 +285,26 @@ class UserActivityReport {
     }
 
     /**
-     * Concatenates user information and activity list into a string, formatted as a
-     * report. It takes a `User` object and a list of `activities`, extracts relevant
-     * details, and returns the resulting string.
+     * Constructs a string report for a user, including their name, age, status, role,
+     * address, and a list of activities they have performed. The report is formatted
+     * with newline characters to represent each section and activity.
      *
-     * @param user user object whose information, including name, age, status, role, and
-     * address, is extracted and formatted into a string report.
+     * @param user user's information, which is then used to populate various fields and
+     * attributes within the formatted report string.
      *
-     * Deconstructs user: Name, Age, Status, Role, and Address.
+     * - The user has a `name`, which is extracted and appended to the string builder.
+     * - The user's `age` is also extracted and appended.
+     * - The user's status depends on whether it is `active` or not, with corresponding
+     * strings "Active" or "Inactive".
+     * - The user has a `role` that is appended to the string builder.
+     * - The user's `address` is extracted and appended.
      *
-     * @param activities list of user activities that are appended to the formatted report
-     * as a series of bullet points, one per activity.
+     * @param activities list of strings that are appended to the report as a series of
+     * activities performed by the user, each preceded by an em dash and a line break.
      *
-     * Enumerates a collection of strings.
+     * Foreachable, containing Strings, unordered.
      *
-     * @returns a formatted string containing user information and activity list.
+     * @returns a formatted string representing user information and their activities.
      */
     private static String formatUserReport(User user, List<String> activities) {
         StringBuilder sb = new StringBuilder();
@@ -310,12 +319,15 @@ class UserActivityReport {
     }
 
     /**
-     * Generates a user activity report by filtering activities of users older than 18
-     * with administrator role and excluding logout actions, then printing the filtered
-     * list of strings to the console.
+     * Generates a user activity report by creating and populating a list of users with
+     * their activities. It then filters out logout events from non-minors (older than
+     * 18) and prints the resulting report.
      *
-     * @param args command-line arguments passed to the Java program when it is executed,
-     * which are not utilized in this main method.
+     * @param args command-line arguments passed to the main class when it is run, but
+     * it is not used in this specific code snippet.
+     *
+     * Parameterized array of strings representing command-line arguments. It contains
+     * no specific values or information for this function's execution.
      */
     public static void main(String[] args) {
         List<UserActivity> aliceActivities = new ArrayList<>();

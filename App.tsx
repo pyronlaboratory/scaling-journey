@@ -41,15 +41,15 @@ const defaultOptions = {
 };
 
 /**
- * @description Takes an object `activity` with three properties: `username`, `action`,
- * and `date`. It returns a formatted string describing the activity, combining these
- * properties with a specific format. The date is converted to a localized string
- * using the `toLocaleDateString()` method.
+ * @description Formats a user's activity into a string. It takes an array-like object
+ * `activity` containing username, action, and date as input, then returns a formatted
+ * string with the desired information. The output is in the format "username performed
+ * action on date".
  *
- * @param {UserActivity} activity - Required for formatting.
+ * @param {UserActivity} activity - Expected to hold user activity data.
  *
- * @returns {string} A formatted message representing an activity performed by a user,
- * including their username, action taken, and date in a specified format.
+ * @returns {string} A formatted sentence describing an activity performed by a user,
+ * including their username, action taken, and date of the event in a specific format.
  */
 const formatActivity = (activity: UserActivity): string => {
   const [username, action, date] = activity;
@@ -57,27 +57,26 @@ const formatActivity = (activity: UserActivity): string => {
 };
 
 /**
- * @description Filters and maps a list of users based on their age, activity status,
- * and specific activities, then renders a report displaying user information and
- * their corresponding activities.
+ * @description Filters a list of users based on minimum age and activity status,
+ * then maps each user to display their name, role, age, address, and activities. The
+ * report is rendered as an unordered list of user cards with detailed information.
  *
- * @param {object} obj - Non-optional. It contains two properties: 'users' and
- * 'options'. The 'users' property expects an array, and it's default value is not
- * defined. The 'options' property also expects an object, with nested objects inside.
+ * @param {object} obj - Mandatory. It has two properties: 'users' which is an array
+ * of objects representing users, and 'options' which is an object with default values
+ * for options 'includeInactive' and 'activityFilter'.
  *
- * @param {User[]} obj.users - Used to filter and render user activity reports.
+ * @param {User[]} obj.users - Intended to hold an array of user objects.
  *
  * @param {number} obj.minAge - Used to filter users based on their age.
  *
  * @param {{
  *     includeInactive = defaultOptions.includeInactive,
  *     activityFilter = defaultOptions.activityFilter,
- *   } = defaultOptions} obj.options - Used to customize filtering and sorting of
- * user data.
+ *   } = defaultOptions} obj.options - Used to define optional filtering criteria for
+ * users and their activities.
  *
- * @returns {React.ReactElement} A JSX element representing the user activity report,
- * including a list of users with their activities, sorted by age and filtered based
- * on the criteria specified in the props.
+ * @returns {React.ReactElement} A JSX element representing a user activity report,
+ * including a list of users with their activities and status.
  */
 const UserActivityReport: React.FC<Props> = ({
   users,
@@ -154,9 +153,10 @@ const users: User[] = [
 ];
 
 /**
- * @description Renders a React component with a title "User Activity Report" and
- * passes three props to the `UserActivityReport` component: an array of users, a
- * minimum age (18), and options for filtering user activity.
+ * @description Renders a user interface component with a heading "User Activity
+ * Report" and a child component `UserActivityReport`. It accepts three props: `users`,
+ * `minAge`, and `options`. The options prop contains an activity filter that excludes
+ * 'logout' actions from the report.
  */
 const App: React.FC = () => (
   <div>

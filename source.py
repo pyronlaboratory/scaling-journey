@@ -4,17 +4,18 @@ from datetime import datetime
 
 class UserRole(Enum):
     """
-    Defines an enumeration for user roles, which can be either `ADMIN`, `USER`,
-    or `GUEST`. This allows developers to assign a role to a user and easily
-    distinguish between different types of users based on their privileges and
-    access levels.
+    Represents a set of predefined roles for users, which can be accessed as enum
+    values (ADMIN, USER, GUEST). It associates each role with a string value
+    ("Admin", "User", "Guest"). The class is likely used to categorize and manage
+    user permissions.
 
     Attributes:
-        ADMIN (UserRole): Equal to "Admin".
-        USER (UserRole): Assigned the string value `"User"`. It represents a user
-            role with limited permissions.
-        GUEST (UserRole): Assigned a value of "Guest". It represents a guest user
-            role with limited access or privileges.
+        ADMIN (str|bytes): 4 characters long, with a value representing the user
+            role 'Admin'. It corresponds to the first member of the Enum.
+        USER (UserRole): Associated with the string value "User". It represents a
+            user role and can be used to differentiate users from admins or guests.
+        GUEST (str|Literal[Admin,User,Guest]): 5 characters long. It represents a
+            user role with the name 'Guest'.
 
     """
     ADMIN = "Admin"
@@ -24,54 +25,39 @@ class UserRole(Enum):
 UserActivity = Tuple[str, str, datetime]
 
 class User:
+    """
+    Instantiates a user object with properties including name, age, activity status,
+    role, address, and activities, allowing for comprehensive representation of
+    individual users within an application or system.
+
+    """
     # inline comment
-    """
-    Defines a user entity with attributes: name, age, activity status, role, and
-    address. It also maintains a list of user activities. This class provides a
-    way to represent users with varying roles and activities, facilitating storage
-    and retrieval of user information.
-
-    Attributes:
-        name (str): Initialized with a given string value in the `__init__` method.
-            It represents the user's name.
-        age (int): Initialized during object creation with a specified integer
-            value. It represents the age of the user.
-        active (bool): Initialized with a given boolean value during object creation,
-            indicating whether the user is active or not.
-        role (UserRole): Initialized with a value provided to the class constructor.
-            It represents the role played by the user, likely categorizing them
-            into specific groups or positions within a system.
-        address (Dict[str,str]): Expected to contain string-value pairs representing
-            the user's address, where keys are likely street name, city, state,
-            country, or similar details.
-        activities (List[UserActivity]): Initialized with a list of user activities
-            when the `User` object is created. It represents a collection of
-            activities performed by the user.
-
-    """
     def __init__(self, name: str, age: int, active: bool, role: UserRole, address: Dict[str, str], activities: List[UserActivity]):
-        # inline comment
         """
-        Initializes a user object by setting its properties: name, age, active
-        status, role, address (a dictionary), and activities (a list).
+        Initializes user attributes such as name, age, activity status, role,
+        address, and list of activities.
 
         Args:
-            name (str): Assigned to the instance variable `self.name`. It is
-                expected to hold a string value representing the user's name.
-            age (int): Required to create an instance of this class, indicating
-                the user's age.
-            active (bool): Assigned to an instance variable of the same name. It
-                represents a boolean value indicating whether the user is active
-                or not.
-            role (UserRole): Assigned to an instance variable named `self.role`.
-            address (Dict[str, str]): Expected to be a dictionary where keys are
-                strings and values are also strings. This suggests that an
-                individual's address can have multiple attributes with corresponding
-                values.
-            activities (List[UserActivity]): Used to initialize an instance variable
-                with a list of user activities.
+            name (str): Assigned to an instance attribute of the same name, which
+                is then set to the value passed as an argument when creating an
+                object of this class. It represents the user's name.
+            age (int): Required for initialization, indicating that it is an
+                essential attribute of the class instance.
+            active (bool): Used to indicate whether a user account is active or
+                not. It defaults to True, implying that users are active by default
+                unless specified otherwise.
+            role (UserRole): Assigned to an instance variable with the same name.
+                The UserRole type is not defined in this code snippet, but it
+                likely represents a predefined set of user roles.
+            address (Dict[str, str]): Defined as a dictionary with string keys and
+                values representing an individual's address. It maps street names
+                to their corresponding addresses.
+            activities (List[UserActivity]): Expected to contain multiple instances
+                of UserActivity, representing various activities associated with
+                the user.
 
         """
+        # inline comment
         self.name = name
         self.age = age
         self.active = active
@@ -81,20 +67,6 @@ class User:
 
 def format_activity(activity: UserActivity) -> str:
     # inline comment
-    """
-    Formats a user activity into a string, taking a tuple-like object (`activity`)
-    as input, which contains username, action, and date. It returns a string
-    describing the activity in the format "username performed action on YYYY-MM-DD".
-
-    Args:
-        activity (UserActivity): Expected to be a tuple or list that contains
-            exactly three elements: username, action, and date.
-
-    Returns:
-        str: A formatted string that represents an activity, indicating the username
-        who performed the action and when it was done.
-
-    """
     username, action, date = activity
     return f"{username} performed {action} on {date.strftime('%Y-%m-%d')}"
 
@@ -104,26 +76,6 @@ def generate_user_activity_report(
     options: Optional[Dict[str, Optional[Callable[[UserActivity], bool]]]] = None
 ) -> List[Dict[str, str]]:
     # inline comment
-    """
-    Generates a report summarizing user activities, filtering by age and activity
-    status. It takes a list of users, an optional minimum age, and an optional
-    dictionary of filter options (including inactive users and custom activity filters).
-
-    Args:
-        users (List[User]): Expected to be a list of User objects, where each User
-            object has attributes such as name, age, active status, role, and address.
-        min_age (int): 18 by default. It filters out users whose age is less than
-            this minimum age.
-        options (Optional[Dict[str, Optional[Callable[[UserActivity], bool]]]]):
-            Optional by default. It allows filtering users based on two options:
-            whether to include inactive users and a custom activity filter.
-
-    Returns:
-        List[Dict[str, str]]: A list of dictionaries. Each dictionary represents
-        a user and contains their name, age, whether they are active or not, role,
-        address, and a list of activities that match the provided filter criteria.
-
-    """
     if options is None:
         options = {}
     include_inactive = options.get('include_inactive', False)
